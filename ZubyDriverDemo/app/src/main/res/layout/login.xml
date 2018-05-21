@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F9F9F9"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+    <LinearLayout
+        android:id="@+id/ll_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/getmoving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16sp"
+            android:paddingTop="16dp"
+            android:text="Enter Phone Number"
+            android:textColor="#454F63"
+            android:textSize="25sp" />
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccpLogin"
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:countryPreference="US,IN,NZ"
+                app:defaultCode="91" />
+
+            <EditText
+                android:id="@+id/enterphone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:editable="false"
+                android:ems="10"
+                android:hint="1234567890"
+                android:inputType="number"
+                android:background="#ffffff"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+        <EditText
+            android:padding="10dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/enterpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:editable="false"
+            android:ems="10"
+            android:hint="Password"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        >
+        <TextView
+            android:id="@+id/forgot_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:textColor="#20C1D3"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="3dp"/>
+        <TextView
+            android:id="@+id/buttoncontinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/buttonbackground_shape"
+            android:layout_margin="5dp"
+            android:padding="10dp"/>
+
+
+    </LinearLayout>
+
+  <!--  <TextView
+        android:id="@+id/privacy_poilcy"
+        android:textSize="12sp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="#454F63"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
+</RelativeLayout>

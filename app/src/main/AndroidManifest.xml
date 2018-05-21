@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zuby.zubydriverdemo">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".view.Registration.View.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.Registration.View.HomeScreenActivity"></activity>
+        <activity android:name=".view.Registration.View.EnterPhoneNumberActivity"></activity>
+        <activity android:name=".view.Login.View.LoginActivity"></activity>
+        <activity android:name=".view.Registration.View.EnterOtp"></activity>
+        <activity android:name=".view.Registration.View.RegistrationActivity"></activity>
+        <activity android:name=".view.SetPassword.View.SetPasswordActivity"></activity>
+        <activity android:name=".view.DocumentUpload.View.DocumentUploadActivity"
+                    android:launchMode="singleTask"></activity>
+        <activity android:name=".view.DocumentUpload.View.DocumentPreviewActivity"></activity>
+        <activity android:name=".view.Agreement.View.AgreementActivity"></activity>
+        <activity android:name=".view.DashBoard.View.DashBoardActivity"></activity>
+
+
+
+        <receiver android:name="com.zuby.zubydriverdemo.Receiver.SmsReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+
+
+</manifest>

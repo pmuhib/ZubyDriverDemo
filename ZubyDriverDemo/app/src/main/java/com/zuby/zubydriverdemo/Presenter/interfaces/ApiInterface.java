@@ -1,0 +1,69 @@
+package com.zuby.zubydriverdemo.Presenter.interfaces;
+
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+
+
+import com.zuby.zubydriverdemo.DocumentUpload.Model.CityModel;
+import com.zuby.zubydriverdemo.DocumentUpload.Model.DocumentUploadModel;
+import com.zuby.zubydriverdemo.HasPassword.Model.HassPasswordModel;
+import com.zuby.zubydriverdemo.Login.Model.LoginModel;
+import com.zuby.zubydriverdemo.Registration.Model.NewRegisterModel;
+import com.zuby.zubydriverdemo.Registration.Model.OtpVerified;
+import com.zuby.zubydriverdemo.Registration.Model.RegistrationModel;
+import com.zuby.zubydriverdemo.Registration.Model.SessionModel;
+import com.zuby.zubydriverdemo.Registration.Model.OtpModel;
+import com.zuby.zubydriverdemo.SetPassword.Model.SetPasswordModel;
+
+/**
+ * Created by citymapper-pc5 on 18/5/18.
+ */
+
+public interface ApiInterface
+{
+
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @POST("level1Register")
+    Call<NewRegisterModel> registerMobile(@Body RequestBody title);
+
+//    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @POST("api/otp_send")
+    Call<OtpModel> sendOtp(@Body RequestBody title);
+
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @POST("hasPassword")
+    Call<HassPasswordModel> sendHassPassword(@Body RequestBody title);
+
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @POST("setPassword")
+    Call<SetPasswordModel> setPassword(@Body RequestBody title);
+
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @POST("level2Register")
+    Call<RegistrationModel> setRegistration(@Body RequestBody title);
+
+//    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @POST("api/otp_verification")
+    Call<OtpVerified> setVerifyOtp(@Body RequestBody title);
+
+//    @Headers("Content-Type: application/json")
+    @POST("login")
+    Call<LoginModel> setLogin(@Body RequestBody title);
+
+    @Headers("Content-Type: application/json")
+    @POST("isSessionValid")
+    Call<SessionModel> checkSession(@Body RequestBody title);
+
+    @Headers("Content-Type: application/json")
+    @POST("getDocumentByUserTypeAndCity")
+    Call<CityModel> getCityDocs(@Body RequestBody title);
+
+    @Headers("Content-Type: application/json")
+    @POST("adddriverdocument")
+    Call<DocumentUploadModel> DocUpload(@Body RequestBody title);
+
+
+}
