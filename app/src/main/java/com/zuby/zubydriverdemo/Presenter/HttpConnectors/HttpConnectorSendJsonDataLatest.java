@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 /**
  * Created by citymapper-pc5 on 17/4/18.
  */
-
 public class HttpConnectorSendJsonDataLatest
 {
     private static String url_param;
