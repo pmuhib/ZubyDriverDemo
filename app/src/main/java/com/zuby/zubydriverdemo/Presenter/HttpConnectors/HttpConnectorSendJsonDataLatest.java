@@ -34,7 +34,8 @@ public class HttpConnectorSendJsonDataLatest
         this.url_param = url_param;
     }
 
-    public static String fetchData(Context cn) {
+    public static String fetchData(Context cn)
+    {
         InputStream is = null;
         InputStreamReader isr = null;
         StringBuffer sb = null; // To read data
