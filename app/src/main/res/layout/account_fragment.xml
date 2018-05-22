@@ -154,8 +154,6 @@
         android:padding="16dp"
         android:textColor="@color/black"
         android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"/>
-
-
 </LinearLayout>
 <ProgressBar
 android:id="@+id/progressBar"
