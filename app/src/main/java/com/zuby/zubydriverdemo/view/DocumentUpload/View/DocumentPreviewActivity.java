@@ -1,14 +1,17 @@
 package com.zuby.zubydriverdemo.view.DocumentUpload.View;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +26,7 @@ import com.zuby.zubydriverdemo.view.DocumentUpload.Presenter.DocumentUploadPrese
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
 import com.zuby.zubydriverdemo.R;
 import com.zuby.zubydriverdemo.Utils.PreferenceManager;
+import com.zuby.zubydriverdemo.view.Login.View.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
@@ -46,6 +50,7 @@ public class DocumentPreviewActivity extends Activity
     private HashMap<String,String>map;
     private String mDriverid,mTokenid,mDocumentid,mDocument_name;
     private Bundle mBundle;
+    private static final int REQUEST_CODE = 99;
 
 
     @Override
@@ -72,8 +77,6 @@ public class DocumentPreviewActivity extends Activity
             mTokenid=mBundle.getString("tokenid");
             mDocumentid=mBundle.getString("document_id");
             mDocument_name=mBundle.getString("documnet_name");
-
-//            document_name.setText(mDocument_name);
 
             Log.e("Em","tokenid in preview"+" "+mTokenid);
         }
@@ -152,11 +155,24 @@ public class DocumentPreviewActivity extends Activity
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 Log.e("Selected Item", String.valueOf(which));
-                if (which == 0) {
-                    callCamera();
+                if (which == 0)
+                {
+
+                    if (ActivityCompat.checkSelfPermission(DocumentPreviewActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(DocumentPreviewActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_REQUEST);
+                    } else {
+                        callCamera();
+                    }
+
                 }
-                if (which == 1) {
-                    callGallery();
+                if (which == 1)
+                {
+
+                    if (ActivityCompat.checkSelfPermission(DocumentPreviewActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(DocumentPreviewActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_FROM_GALLERY);
+                    } else {
+                        callGallery();
+                    }
                 }
 
             }
@@ -165,6 +181,30 @@ public class DocumentPreviewActivity extends Activity
 
         dialog.show();
 
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,  String permissions[],  int[] grantResults)
+    {
+        switch (requestCode) {
+            case PICK_FROM_GALLERY:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    callGallery();
+                } else {
+                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
+                }
+                break;
+
+            case CAMERA_REQUEST:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    callCamera();
+                } else {
+                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
+                }
+                break;
+        }
     }
 
 
@@ -228,36 +268,43 @@ public class DocumentPreviewActivity extends Activity
             case PICK_FROM_GALLERY:
 
 
+                try {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                    Cursor cursor = this.getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    cursor.moveToFirst();
 
-                Cursor cursor = this.getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String picturePath = cursor.getString(columnIndex);
+                    cursor.close();
 
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String picturePath = cursor.getString(columnIndex);
-                cursor.close();
+                    Log.e("Em","picturePath"+" "+picturePath);
 
-                Log.e("Em","picturePath"+" "+picturePath);
+                    Bitmap compressedBitmap = BitmapFactory.decodeFile(picturePath);
 
-                Bitmap compressedBitmap = BitmapFactory.decodeFile(picturePath);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    compressedBitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                    byte[] byteArray = stream.toByteArray();
+                    mBitmap  = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
 
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                compressedBitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
-                byte[] byteArray = stream.toByteArray();
-                mBitmap  = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+                    mImgPreview.setImageBitmap(mBitmap);
 
-                mImgPreview.setImageBitmap(mBitmap);
-
-                mInstructions.setVisibility(View.GONE);
-                mTake_photo.setVisibility(View.GONE);
-                mTwo_buttons.setVisibility(View.VISIBLE);
+                    mInstructions.setVisibility(View.GONE);
+                    mTake_photo.setVisibility(View.GONE);
+                    mTwo_buttons.setVisibility(View.VISIBLE);
 
 
 
-                break;
+                    break;
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Log.e("Em","::::::exception:::::"+" "+e);
+                }
+
         }
     }
 

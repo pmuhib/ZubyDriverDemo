@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Legal Content"
+    android:textSize="24sp"
+    android:textColor="@color/black"
+    android:textStyle="normal"
+    android:padding="16sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Here Will be your text"
+        android:textStyle="normal"
+        android:padding="16dp"
+        android:layout_marginLeft="10dp"/>
+    <CheckBox
+        android:id="@+id/checkdoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginLeft="10dp"
+        android:text="By clicking on this you agree with our legal content."/>
+</LinearLayout>
+    <TextView
+        android:id="@+id/continuebutton"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONTINUE"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/buttonbackground_shape"
+        android:padding="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"/>
+</RelativeLayout>

@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zuby.zubydriverdemo.view.DocumentUpload.View.DocumentUploadActivity;
+import com.zuby.zubydriverdemo.view.DocumentUpload.View.LegalDocActivity;
 import com.zuby.zubydriverdemo.view.Login.Model.LoginModel;
 import com.zuby.zubydriverdemo.view.Login.Presenter.LoginPresenter;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
@@ -116,7 +117,7 @@ public class LoginActivity extends Activity
                         {
                             LoginModel loginmodel = (LoginModel)object;
 
-                            Intent intent = new Intent(LoginActivity.this, DocumentUploadActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, LegalDocActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("tokenid",mTokenid);
                             intent.putExtras(bundle);

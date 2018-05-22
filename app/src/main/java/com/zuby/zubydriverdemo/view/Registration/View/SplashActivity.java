@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.zuby.zubydriverdemo.view.DocumentUpload.View.DocumentUploadActivity;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
 import com.zuby.zubydriverdemo.R;
+import com.zuby.zubydriverdemo.view.DocumentUpload.View.LegalDocActivity;
 import com.zuby.zubydriverdemo.view.Registration.Model.SessionModel;
 import com.zuby.zubydriverdemo.view.Registration.presenter.ManageSessionPresenter;
 import com.zuby.zubydriverdemo.view.Registration.presenter.SessionValid;
@@ -58,6 +59,8 @@ public class SplashActivity extends Activity implements ResultInterface
         }
         else {
             requestContactPermission();
+            isStoragePermissionGranted();
+
         }
 
 
@@ -93,7 +96,7 @@ public class SplashActivity extends Activity implements ResultInterface
                 if(sessionModel.getMessage().equalsIgnoreCase("valid"))
                 {
                     Toast.makeText(SplashActivity.this,"session valid!!",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SplashActivity.this,DocumentUploadActivity.class);
+                    Intent intent = new Intent(SplashActivity.this,LegalDocActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("tokenid",tokenid);
                     intent.putExtras(bundle);
