@@ -10,7 +10,9 @@ import android.os.CountDownTimer;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,6 +62,39 @@ public class EnterOtp extends Activity
 
         Log.e("Em","enter otp");
 
+        pin_first_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Some logic here.
+                    return false; // Focus will do whatever you put in the logic.
+                }
+                return false;  // Focus will change according to the actionId
+            }
+        });
+
+        pin_second_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Some logic here.
+                    return false; // Focus will do whatever you put in the logic.
+                }
+                return false;  // Focus will change according to the actionId
+            }
+        });
+
+        pin_third_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Some logic here.
+                    return false; // Focus will do whatever you put in the logic.
+                }
+                return false;  // Focus will change according to the actionId
+            }
+        });
+
 
         mPreferenceManager = new PreferenceManager(EnterOtp.this);
 
@@ -86,10 +121,7 @@ public class EnterOtp extends Activity
                 if (intent.getAction().equalsIgnoreCase("otp")) {
                     final String message = intent.getStringExtra("message");
 
-                    EditText pin_first_edittext = findViewById(R.id.pin_first_edittext);
-                    EditText pin_second_edittext = findViewById(R.id.pin_second_edittext);
-                    EditText pin_third_edittext = findViewById(R.id.pin_third_edittext);
-                    EditText pin_forth_edittext = findViewById(R.id.pin_forth_edittext);
+
 
                     pin_first_edittext.setText(message);
                     pin_second_edittext.setText(message);

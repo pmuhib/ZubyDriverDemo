@@ -39,6 +39,9 @@
                 <EditText
                     android:id="@+id/pin_first_edittext"
                     style="@style/pin_edittext_style"
+                    android:nextFocusRight="@+id/pin_second_edittext"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/pin_second_edittext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="" />
@@ -46,6 +49,9 @@
                 <EditText
                     android:id="@+id/pin_second_edittext"
                     style="@style/pin_edittext_style"
+                    android:imeOptions="actionNext"
+                    android:nextFocusRight="@+id/pin_third_edittext"
+                    android:nextFocusForward="@+id/pin_third_edittext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="" />
@@ -53,6 +59,9 @@
                 <EditText
                     android:id="@+id/pin_third_edittext"
                     style="@style/pin_edittext_style"
+                    android:imeOptions="actionNext"
+                    android:nextFocusRight="@+id/pin_forth_edittext"
+                    android:nextFocusForward="@+id/pin_forth_edittext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="" />
@@ -60,6 +69,7 @@
                 <EditText
                     android:id="@+id/pin_forth_edittext"
                     style="@style/pin_edittext_style"
+                    android:imeOptions="actionDone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="" />
