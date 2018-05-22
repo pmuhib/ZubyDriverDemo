@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ZubyDriverDemo</string>
+    <string name="legal_contents">Legal Content</string>
+
 </resources>
