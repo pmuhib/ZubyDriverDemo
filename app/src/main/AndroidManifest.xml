@@ -31,9 +31,9 @@
         <activity android:name=".view.DocumentUpload.View.DocumentUploadActivity"
                     android:launchMode="singleTask"></activity>
         <activity android:name=".view.DocumentUpload.View.DocumentPreviewActivity"></activity>
-        <activity android:name=".view.Agreement.View.AgreementActivity"></activity>
         <activity android:name=".view.DashBoard.View.DashBoardActivity"></activity>
-
+        <activity android:name=".view.DocumentUpload.View.LegalDocActivity"></activity>
+        <activity android:name=".view.DocumentUpload.View.AgreementActivity"></activity>
 
 
         <receiver android:name="com.zuby.zubydriverdemo.Receiver.SmsReceiver">

@@ -64,8 +64,7 @@ public class DocumentUploadPresenter
                         Log.e("Zuby","type"+ " "+response.body().getMessage());
                         mResultInterface.onSuccess(response.body());
                     }
-                    else
-                        {
+                    else {
                         mResultInterface.onFailed(response.message());
                     }
                 }

@@ -56,7 +56,6 @@ public class LoginPresenter
     public void addService(String data)
     {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), data);
-//        Retrofit client = RetroClient.ridermanagementurl();
         ApiInterface mApiService = RetroClient.getClient().create(ApiInterface.class);
         Call<LoginModel> addService = mApiService.setLogin(requestBody);
         addService.enqueue(new Callback<LoginModel>()

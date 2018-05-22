@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.zuby.zubydriverdemo.view.Login.Presenter.LoginPresenter;
 import com.zuby.zubydriverdemo.view.Login.View.LoginActivity;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
 import com.zuby.zubydriverdemo.R;
@@ -90,11 +91,28 @@ public class RegistrationActivity extends Activity
                             {
                                 Log.e("Em","on success in setpasswrd");
 
-                                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putString("tokenid",mTokenid);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
+
+
+                                new LoginPresenter().show(new ResultInterface() {
+                                    @Override
+                                    public void onSuccess(String object) {
+
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Object object) {
+                                        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("tokenid",mTokenid);
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+
+                                    @Override
+                                    public void onFailed(Object string) {
+
+                                    }
+                                },RegistrationActivity.this,"+91",mMobileno,et_password.getText().toString(),"Android","driver_android","7","driver_session","1","Asia/Calcutta",mTokenid,"device_id");
                             }
 
                             @Override
