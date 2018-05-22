@@ -10,4 +10,5 @@
     <color name="splashcolor">#2A2E43</color>
     <color name="cyan">#20C1D3</color>
     <color name="bgBottomNavigation">#20C1D3</color>
+    <color name="accountback">#2A2E43</color>
 </resources>
