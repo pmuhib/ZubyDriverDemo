@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-
 import com.zuby.zubydriverdemo.R;
 
 /**
@@ -21,7 +20,8 @@ public class LegalDocActivity extends Activity
 {
     private TextView mContinuebutton;
     private CheckBox mCheckdoc;
-
+    private Bundle mBundle;
+    private String mDriverid,mTokenid;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -30,6 +30,14 @@ public class LegalDocActivity extends Activity
         setContentView(R.layout.legalcontent);
         mContinuebutton=findViewById(R.id.continuebutton);
         mCheckdoc=findViewById(R.id.checkdoc);
+
+        mBundle= getIntent().getExtras();
+
+        if(mBundle!=null)
+        {
+            mDriverid = mBundle.getString("user_id");
+            mTokenid = mBundle.getString("tokenid");
+        }
 
         mContinuebutton.setEnabled(false);
 
@@ -51,8 +59,11 @@ public class LegalDocActivity extends Activity
         mContinuebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(LegalDocActivity.this,DocumentUploadActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("user_id",mDriverid);
+                bundle.putString("tokenid",mTokenid);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

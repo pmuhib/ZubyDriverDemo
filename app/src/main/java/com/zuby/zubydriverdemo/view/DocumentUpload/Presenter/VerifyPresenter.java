@@ -4,11 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.zuby.zubydriverdemo.view.DocumentUpload.Model.CityModel;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ApiInterface;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
 import com.zuby.zubydriverdemo.Utils.RetroClient;
-import com.zuby.zubydriverdemo.view.DocumentUpload.Model.GetCityModel;
+import com.zuby.zubydriverdemo.view.DocumentUpload.Model.DocumentUploadModel;
+import com.zuby.zubydriverdemo.view.DocumentUpload.Model.VerifyDocumentModel;
 
 import java.util.HashMap;
 
@@ -19,50 +19,44 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by citymapper-pc5 on 20/5/18.
+ * Created by citymapper-pc5 on 22/5/18.
  */
 
-public class CheckDocPresenter
+public class VerifyPresenter
 {
-    private Context mContext;
-    private ResultInterface mResultinterface;
+    Context mContext;
+    ResultInterface mResultinterface;
 
-
-    public void show(ResultInterface mResultinterface,Context mContext,String citycode,String tokenid,String document_for)
+    public void show(ResultInterface mResultinterface,Context mContext,String driver_id,String document_id,String tokenid)
     {
-        this.mContext=mContext;
         this.mResultinterface=mResultinterface;
+        this.mContext=mContext;
 
         HashMap<String,String>map= new HashMap<>();
-        map.put("city_code",citycode);
+        map.put("driver_id",driver_id);
+        map.put("document_id",document_id);
         map.put("tokenid",tokenid);
-        map.put("document_for",document_for);
-
-        addService(new Gson().toJson(map));
     }
-
 
     public void addService(String data)
     {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), data);
         ApiInterface mApiService = RetroClient.getClientForDocService().create(ApiInterface.class);
-        Call<GetCityModel> addService = mApiService.getCityDocs(requestBody);
-        addService.enqueue(new Callback<GetCityModel>()
+        Call<VerifyDocumentModel> addService = mApiService.VerifyDoc(requestBody);
+        addService.enqueue(new Callback<VerifyDocumentModel>()
         {
             @Override
-            public void onResponse(Call<GetCityModel> call,
-                                   Response<GetCityModel> response)
+            public void onResponse(Call<VerifyDocumentModel> call,
+                                   Response<VerifyDocumentModel> response)
             {
                 try {
                     Log.e("ZUBY", new Gson().toJson(response.body()));
-                    if (response.code()==200)
+                    if (response.body().getType().equals("success"))
                     {
-                    Log.e("Zuby","type"+ " "+response.body().getMessage());
-                        GetCityModel.DataBean dataBean = new GetCityModel.DataBean();
-//                        dataBean.setDocument_id();
-
-                        mResultinterface.onSuccess(response.body().getData());
-                    } else {
+                        Log.e("Zuby","type"+ " "+response.body().getMessage());
+                        mResultinterface.onSuccess(response.body());
+                    }
+                    else {
                         mResultinterface.onFailed(response.message());
                     }
                 }
@@ -73,11 +67,12 @@ public class CheckDocPresenter
             }
 
             @Override
-            public void onFailure(Call<GetCityModel> call, Throwable t)
+            public void onFailure(Call<VerifyDocumentModel> call, Throwable t)
             {
                 mResultinterface.onFailed("No Data Found");
                 Log.d("ZUBY", "" + t);
             }
         });
     }
+
 }

@@ -39,7 +39,7 @@
                 android:id="@+id/next"
                 android:layout_gravity="right"
                 android:paddingRight="20dp"
-                android:src="@drawable/download"
+                android:src="@drawable/publish"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
 
@@ -47,7 +47,7 @@
                     android:id="@+id/okay"
                     android:layout_gravity="right"
                     android:paddingRight="20dp"
-                    android:src="@drawable/ic_select_filter"
+                    android:src="@drawable/done"
                     android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />

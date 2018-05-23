@@ -5,5 +5,9 @@
     <string name="agree">By clicking on this you agree with our legal content.</string>
 
     <string name="saveupdate">SAVE &amp; UPDATE</string>
+    <string name="account_inactive">Account Inactive</string>
+    <string name="welcome">Welcome!!</string>
+    <string name="approval">We will notify you once you are approved to drive. Explore the app in the mean time</string>
+
 
 </resources>

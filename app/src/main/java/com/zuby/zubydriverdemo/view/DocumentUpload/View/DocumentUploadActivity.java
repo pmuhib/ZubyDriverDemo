@@ -23,7 +23,7 @@ public class DocumentUploadActivity extends Activity
 {
     private RecyclerView mRecyclerview;
     private LinearLayoutManager mLinearLayoutManager;
-    private String mTokenid;
+    private String mTokenid,mDocument_id,mDocument_name,mDriverid;
     private Bundle mBundle;
     private DocumentAdapter mAdapter;
     private Button document_submit;
@@ -45,22 +45,10 @@ public class DocumentUploadActivity extends Activity
         if(mBundle!=null)
         {
             mTokenid = mBundle.getString("tokenid");
+            mDriverid = mBundle.getString("user_id");
             Log.e("Em","tokenid in docupload"+" "+mTokenid);
         }
 
-
-        document_submit.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(DocumentUploadActivity.this, AgreementActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("tokenid",mTokenid);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
 
         new CheckDocPresenter().show(new ResultInterface()
         {
@@ -78,18 +66,37 @@ public class DocumentUploadActivity extends Activity
 
                 Log.e("Zuby",":::::::::OBJECT::::::::"+" "+getCityModel.getMessage());
 
+//                mDocument_id = getCityModel.getData().getDocument_id();
+
+                mAdapter = new DocumentAdapter(DocumentUploadActivity.this,mTokenid,mDocument_id,mDocument_name);
+                mRecyclerview.setAdapter(mAdapter);
+                Log.e("Em","tokenid in docupload"+" "+mTokenid);
+
             }
 
             @Override
             public void onFailed(Object string)
             {
-                mAdapter = new DocumentAdapter(DocumentUploadActivity.this,mTokenid,"","");
-                mRecyclerview.setAdapter(mAdapter);
-                Log.e("Em","tokenid in docupload"+" "+mTokenid);
 
 
             }
         },DocumentUploadActivity.this,"noida",mTokenid,"driver");
+
+        document_submit.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(DocumentUploadActivity.this, AgreementActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("tokenid",mTokenid);
+                bundle.putString("user_id",mDriverid);
+                bundle.putString("document_id",mDocument_id);
+                bundle.putString("document_name",mDocument_name);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
 
     }

@@ -9,6 +9,8 @@ import retrofit2.http.POST;
 
 import com.zuby.zubydriverdemo.view.DocumentUpload.Model.CityModel;
 import com.zuby.zubydriverdemo.view.DocumentUpload.Model.DocumentUploadModel;
+import com.zuby.zubydriverdemo.view.DocumentUpload.Model.GetCityModel;
+import com.zuby.zubydriverdemo.view.DocumentUpload.Model.VerifyDocumentModel;
 import com.zuby.zubydriverdemo.view.HasPassword.Model.HassPasswordModel;
 import com.zuby.zubydriverdemo.view.Login.Model.LoginModel;
 import com.zuby.zubydriverdemo.view.Registration.Model.NewRegisterModel;
@@ -59,11 +61,15 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST("getDocumentByUserTypeAndCity")
-    Call<CityModel> getCityDocs(@Body RequestBody title);
+    Call<GetCityModel> getCityDocs(@Body RequestBody title);
 
     @Headers("Content-Type: application/json")
     @POST("adddriverdocument")
     Call<DocumentUploadModel> DocUpload(@Body RequestBody title);
+
+    @Headers("Content-Type: application/json")
+    @POST("verifydocument")
+    Call<VerifyDocumentModel> VerifyDoc(@Body RequestBody title);
 
 
 }
