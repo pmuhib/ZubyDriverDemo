@@ -8,7 +8,9 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -62,38 +64,60 @@ public class EnterOtp extends Activity
 
         Log.e("Em","enter otp");
 
-        pin_first_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
-                if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    // Some logic here.
-                    return false; // Focus will do whatever you put in the logic.
+        pin_first_edittext.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+
+                if (s.length() ==1) {
+                    pin_second_edittext.requestFocus();
                 }
-                return false;  // Focus will change according to the actionId
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
             }
         });
 
-        pin_second_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
-                if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    // Some logic here.
-                    return false; // Focus will do whatever you put in the logic.
+        pin_second_edittext.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+
+                if (s.length() ==1) {
+                    pin_third_edittext.requestFocus();
                 }
-                return false;  // Focus will change according to the actionId
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
             }
         });
 
-        pin_third_edittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
-                if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    // Some logic here.
-                    return false; // Focus will do whatever you put in the logic.
+        pin_third_edittext.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+
+                if (s.length() ==1) {
+                    pin_forth_edittext.requestFocus();
                 }
-                return false;  // Focus will change according to the actionId
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
             }
         });
+
 
 
         mPreferenceManager = new PreferenceManager(EnterOtp.this);
@@ -121,12 +145,14 @@ public class EnterOtp extends Activity
                 if (intent.getAction().equalsIgnoreCase("otp")) {
                     final String message = intent.getStringExtra("message");
 
+                    char[] charArray = message.toCharArray();
 
+                    Log.e("Zuby","charArray"+" "+charArray+" "+charArray[charArray.length - 5]);
 
-                    pin_first_edittext.setText(message);
-                    pin_second_edittext.setText(message);
-                    pin_third_edittext.setText(message);
-                    pin_forth_edittext.setText(message);
+                    pin_first_edittext.setText(charArray[charArray.length - 5]);
+                    pin_second_edittext.setText(charArray[charArray.length -4]);
+                    pin_third_edittext.setText(charArray[charArray.length - 3]);
+                    pin_forth_edittext.setText(charArray[charArray.length - 2]);
                 }
             }
         };

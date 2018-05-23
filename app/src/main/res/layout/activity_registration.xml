@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical"
+        android:background="#F9F9F9"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
@@ -119,11 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/registrationclick"
             android:layout_width="match_parent"
@@ -135,6 +132,12 @@
             android:layout_margin="8dp"
             android:textColor="@color/white"
             android:padding="16dp"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </FrameLayout>
       <!--  <TextView
             android:layout_width="match_parent"

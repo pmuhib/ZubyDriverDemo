@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="#F9F9F9"
         android:visibility="visible">
 
         <TextView
@@ -134,13 +135,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+
             <TextView
                 android:id="@+id/next"
                 android:layout_alignParentBottom="true"
@@ -158,6 +153,14 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:padding="16dp"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
             </FrameLayout>
         </LinearLayout>
     </LinearLayout>

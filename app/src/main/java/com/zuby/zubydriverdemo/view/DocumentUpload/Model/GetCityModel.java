@@ -9,23 +9,16 @@ import java.util.List;
 public class GetCityModel
 {
 
+
     /**
-     * type : success
+     * data : [{"document_id":1,"document_name":"Test"},{"document_id":2,"document_name":"Test2"}]
      * message : Record found
-     * data : [{"document_id":123,"document_name":"Cake PHP tutorial"},{"document_id":1234,"document_name":"Yii2 Totorial"}]
+     * type : success
      */
 
-    private String type;
     private String message;
+    private String type;
     private List<DataBean> data;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getMessage() {
         return message;
@@ -33,6 +26,14 @@ public class GetCityModel
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<DataBean> getData() {
@@ -45,8 +46,8 @@ public class GetCityModel
 
     public static class DataBean {
         /**
-         * document_id : 123
-         * document_name : Cake PHP tutorial
+         * document_id : 1
+         * document_name : Test
          */
 
         private int document_id;

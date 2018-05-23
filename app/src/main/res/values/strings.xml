@@ -3,7 +3,9 @@
     <string name="legal_contents">Legal Content</string>
     <string name="text">Here Will be your text</string>
     <string name="agree">By clicking on this you agree with our legal content.</string>
-
+    <string name="account_inactive">Account Inactive</string>
+    <string name="welcome">Welcome!!</string>
+    <string name="approval">We will notify you once you are approved to drive. Explore the app in the mean time</string>
 
 
 </resources>

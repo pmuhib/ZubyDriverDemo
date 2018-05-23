@@ -39,7 +39,6 @@ public class DocumentUploadPresenter
         map.put("document_image",mDocumentImage);
         map.put("tokenid",mTokenid);
 
-
         addService(new Gson().toJson(map));
 
     }
