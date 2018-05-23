@@ -3,10 +3,9 @@
     package="com.zuby.zubydriverdemo">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,27 +21,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.Registration.View.HomeScreenActivity"></activity>
-        <activity android:name=".view.Registration.View.EnterPhoneNumberActivity"></activity>
-        <activity android:name=".view.Login.View.LoginActivity"></activity>
-        <activity android:name=".view.Registration.View.EnterOtp"></activity>
-        <activity android:name=".view.Registration.View.RegistrationActivity"></activity>
-        <activity android:name=".view.SetPassword.View.SetPasswordActivity"></activity>
-        <activity android:name=".view.DocumentUpload.View.DocumentUploadActivity"
-                    android:launchMode="singleTask"></activity>
-        <activity android:name=".view.DocumentUpload.View.DocumentPreviewActivity"></activity>
-        <activity android:name=".view.DashBoard.View.DashBoardActivity"></activity>
-        <activity android:name=".view.DocumentUpload.View.LegalDocActivity"></activity>
-        <activity android:name=".view.DocumentUpload.View.AgreementActivity"></activity>
+        <activity android:name=".view.Registration.View.HomeScreenActivity" />
+        <activity android:name=".view.Registration.View.EnterPhoneNumberActivity" />
+        <activity android:name=".view.Login.View.LoginActivity" />
+        <activity android:name=".view.Registration.View.EnterOtp" />
+        <activity android:name=".view.Registration.View.RegistrationActivity" />
+        <activity android:name=".view.SetPassword.View.SetPasswordActivity" />
+        <activity
+            android:name=".view.DocumentUpload.View.DocumentUploadActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".view.DocumentUpload.View.DocumentPreviewActivity" />
+        <activity android:name=".view.DashBoard.View.DashBoardActivity" />
+        <activity android:name=".view.DocumentUpload.View.LegalDocActivity" />
+        <activity android:name=".view.DocumentUpload.View.AgreementActivity" />
 
-
-        <receiver android:name="com.zuby.zubydriverdemo.Receiver.SmsReceiver">
+        <receiver android:name=".Receiver.SmsReceiver">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".view.DashBoard.View.view.EditProfileActivity"></activity>
     </application>
-
-
 
 </manifest>

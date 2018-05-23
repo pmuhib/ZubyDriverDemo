@@ -1,4 +1,4 @@
-package com.zuby.zubydriverdemo.view.DashBoard.View;
+package com.zuby.zubydriverdemo.view.DashBoard.View.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

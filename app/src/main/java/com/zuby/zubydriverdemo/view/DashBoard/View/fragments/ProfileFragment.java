@@ -1,4 +1,4 @@
-package com.zuby.zubydriverdemo.view.DashBoard.View;
+package com.zuby.zubydriverdemo.view.DashBoard.View.fragments;
 
 /**
  * Created by citymapper-pc5 on 21/5/18.
