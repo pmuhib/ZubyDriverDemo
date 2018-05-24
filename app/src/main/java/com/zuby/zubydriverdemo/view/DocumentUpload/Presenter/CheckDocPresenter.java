@@ -51,6 +51,10 @@ public class CheckDocPresenter
             public void onResponse(Call<GetCityModelNew2> call,
                                    Response<GetCityModelNew2> response)
             {
+//                GetCityModelNew2 getCityModelNew2=new GetCityModelNew2();
+//                Gson gson=new Gson();
+//                getCityModelNew2=gson.fromJson(response.toString(),GetCityModelNew2.class);
+//                Log.e("Em",":::::document name::::::"+" "+getCityModelNew2.getData().get(0).getDocument_id());
                 try {
                     Log.e("ZUBY", new Gson().toJson(response.body()));
 

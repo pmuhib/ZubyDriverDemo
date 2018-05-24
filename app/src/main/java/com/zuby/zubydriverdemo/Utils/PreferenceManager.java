@@ -137,4 +137,20 @@ public class PreferenceManager
         return map;
     }
 
+    public void saveDriverFullName(String first_name,String last_name)
+    {
+        editor.putString("first_name",first_name);
+        editor.putString("last_name",last_name);
+        editor.commit();
+    }
+
+    public HashMap getDriverFullName()
+    {
+        HashMap<String,String>map = new HashMap<>();
+        map.put("first_name",pref.getString("first_name",null));
+        map.put("last_name",pref.getString("last_name",null));
+        return map;
+    }
+
+
 }

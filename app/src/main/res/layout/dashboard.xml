@@ -13,6 +13,13 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
    <!-- <android.support.v4.widget.NestedScrollView
         android:id="@bottom_sheetadapterheet"
         android:layout_width="match_parent"

@@ -153,7 +153,7 @@ public class DocumentPreviewActivity extends AppCompatActivity
                         startActivity(intent);
                         Toast.makeText(DocumentPreviewActivity.this,"failure",Toast.LENGTH_LONG).show();
                     }
-                },DocumentPreviewActivity.this,mDriverid,"123","2019-06-19",encodeTobase64(mBitmap),mTokenid);
+                },DocumentPreviewActivity.this,mDriverid,mDocumentid,"2019-06-19",encodeTobase64(mBitmap),mTokenid);
             }
         });
 
@@ -306,7 +306,7 @@ public class DocumentPreviewActivity extends AppCompatActivity
                     Bitmap compressedBitmap = BitmapFactory.decodeFile(picturePath);
 
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    compressedBitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                    compressedBitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
                     byte[] byteArray = stream.toByteArray();
                     mBitmap  = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
 
