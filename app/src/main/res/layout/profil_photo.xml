@@ -23,8 +23,10 @@
         android:layout_height="96dp"
         android:src="@drawable/ic_person_black_24dp"
         android:padding="8dp"
-        app:civ_border_width="2dp"
-        app:civ_border_color="@color/buttoncolor"/>
+      />
+    <!--
+    app:civ_border_width="2dp"
+    app:civ_border_color="@color/buttoncolor"-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
