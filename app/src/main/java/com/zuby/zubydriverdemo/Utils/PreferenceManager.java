@@ -105,20 +105,36 @@ public class PreferenceManager
 
     }
 
-    public HashMap<String,String>getValue()
+    public void saveDocumentDetails(String document_id, String document_name)
     {
-        HashMap<String,String>map = new HashMap<>();
-        map.put("name",pref.getString("name",null));
-//        map.put("id",pref.getInt("id",0));
-
-        return map;
-
+//        StringBuilder sb_id = new StringBuilder();
+//        sb_id.append(document_id);
+//        StringBuilder sb_name = new StringBuilder();
+//        sb_name.append(document_name);
+        editor.putString("document_id",document_id.toString());
+        editor.putString("document_name",document_name.toString());
+        editor.commit();
     }
 
-    public HashMap<String,Integer>getIntValue()
+    public void saveArraySize(int size)
+    {
+        editor.putInt("size",size);
+        editor.commit();
+    }
+
+    public HashMap getDocumentDetails()
+    {
+        HashMap<String,String>map= new HashMap<>();
+        map.put("document_id",pref.getString("document_id",null));
+        map.put("document_name",pref.getString("document_name",null));
+        return map;
+    }
+
+    public HashMap getArraySize()
     {
         HashMap<String,Integer>map = new HashMap<>();
-        map.put("id",pref.getInt("id",0));
+        map.put("size",pref.getInt("size",0));
         return map;
     }
+
 }

@@ -4,12 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.zuby.zubydriverdemo.view.DocumentUpload.Model.CityModel;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ApiInterface;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
 import com.zuby.zubydriverdemo.Utils.RetroClient;
-import com.zuby.zubydriverdemo.view.DocumentUpload.Model.GetCityModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.MediaType;
@@ -26,14 +25,14 @@ public class CheckDocPresenter
 {
     private Context mContext;
     private ResultInterface mResultinterface;
-
+    private DataItem mDataItem;
 
     public void show(ResultInterface mResultinterface,Context mContext,String citycode,String tokenid,String document_for)
     {
         this.mContext=mContext;
         this.mResultinterface=mResultinterface;
 
-        HashMap<String,String>map= new HashMap<>();
+        HashMap<String,String>map = new HashMap<>();
         map.put("city_code",citycode);
         map.put("tokenid",tokenid);
         map.put("document_for",document_for);
@@ -41,41 +40,45 @@ public class CheckDocPresenter
         addService(new Gson().toJson(map));
     }
 
-
     public void addService(String data)
     {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), data);
         ApiInterface mApiService = RetroClient.getClientForDocService().create(ApiInterface.class);
-        Call<GetCityModel> addService = mApiService.getCityDocs(requestBody);
-        addService.enqueue(new Callback<GetCityModel>()
+        Call<GetCityModelNew2> addService = mApiService.getCityDocs(requestBody);
+        addService.enqueue(new Callback<GetCityModelNew2>()
         {
             @Override
-            public void onResponse(Call<GetCityModel> call,
-                                   Response<GetCityModel> response)
+            public void onResponse(Call<GetCityModelNew2> call,
+                                   Response<GetCityModelNew2> response)
             {
                 try {
                     Log.e("ZUBY", new Gson().toJson(response.body()));
-                    if (response.code()==200)
-                    {
-                    Log.e("Zuby","type"+ " "+response.body().getMessage());
-                        GetCityModel.DataBean dataBean = new GetCityModel.DataBean();
-//                        dataBean.setDocument_id();
 
-                        mResultinterface.onSuccess(response.body().getData());
-                    } else {
-                        mResultinterface.onFailed(response.message());
+//                    for(int i=0;i<response.body().getData().size();i++) {
+//                        mDataItem = new DataItem();
+//                        mDataItem.setDocumentId(response.body().getData().get(i).getDocumentId());
+//                        mDataItem.setDocumentName(response.body().getData().get(i).getDocumentName());
+
+                        Log.e("Zuby", "::::::::::::success:::::::::" + " " +response.body().getType());
+                        if (response.body().getType().equalsIgnoreCase("success")) {
+                            Log.e("Zuby", "type" + " " + response.body());
+                            mResultinterface.onSuccess(response.body());
+                        } else {
+                            mResultinterface.onFailed(response.body());
+                        }
+//                    }
                     }
-                }
                 catch (Exception e)
                 {
-                    mResultinterface.onFailed("No Data Found");
+//                    mResultinterface.onFailed();
                 }
+
             }
 
             @Override
-            public void onFailure(Call<GetCityModel> call, Throwable t)
+            public void onFailure(Call<GetCityModelNew2> call, Throwable t)
             {
-                mResultinterface.onFailed("No Data Found");
+//                mResultinterface.onFailed("No Data Found");
                 Log.d("ZUBY", "" + t);
             }
         });

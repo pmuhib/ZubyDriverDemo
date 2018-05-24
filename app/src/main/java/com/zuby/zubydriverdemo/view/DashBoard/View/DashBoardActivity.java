@@ -1,6 +1,10 @@
 package com.zuby.zubydriverdemo.view.DashBoard.View;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,15 +16,22 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
 import com.zuby.zubydriverdemo.R;
+import com.zuby.zubydriverdemo.view.DashBoard.Presenter.DriverAvailablePresenter;
 import com.zuby.zubydriverdemo.view.DashBoard.Presenter.ItemAdapter;
 import com.zuby.zubydriverdemo.view.DashBoard.model.Item;
 import com.zuby.zubydriverdemo.view.DocumentUpload.Presenter.VerifyPresenter;
@@ -37,12 +48,12 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
     private ActionBar mToolbar;
     private  BottomNavigationView mNavigationView;
     private BottomSheetBehavior mBottomSheetBehavior;
-    private String mDocument_name,mDocument_id,mTokenid,mDriverid;
+    private String mTokenid,mDriverid,mActive="";
     private Bundle mBundle;
-    String [] document_id = new String[3];
-    String [] document_name = new String[3];
-    Fragment fragment;
+    private String mDocument_id[],mDocument_name[];
+    private Fragment fragment;
     private ItemAdapter mAdapter;
+    private SwitchCompat mSwitchCompat;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -50,39 +61,54 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         View bottomSheet = findViewById( R.id.recyclerView);
+        mSwitchCompat = findViewById(R.id.switchForActionBar);
 
-        document_id[0]="123";
-        document_id[1]="456";
-        document_id[2]="789";
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayShowTitleEnabled(false);
+        actionbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F9F9F9")));
 
-        document_name[0]="test0";
-        document_name[1]="test1";
-        document_name[2]="test2";
 
         mBundle=getIntent().getExtras();
 
         if(mBundle!=null)
         {
-            mDocument_id=mBundle.getString("document_id");
-            mDocument_name=mBundle.getString("document_name");
+            mDocument_id=mBundle.getStringArray("document_id");
+            mDocument_name=mBundle.getStringArray("document_name");
             mTokenid=mBundle.getString("tokenid");
             mDriverid=mBundle.getString("user_id");
+
+            Log.e("Em","mDocumnet"+" "+mDocument_name[1]+ " " +mDocument_id.length);
         }
 
-        fragment = new HomeFragment();
-        switchFrag(fragment);
+        mSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+//                    new DriverAvailablePresenter().show(new ResultInterface() {
+//                        @Override
+//                        public void onSuccess(String object) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onSuccess(Object object) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailed(Object string) {
+//
+//                        }
+//                    },DashBoardActivity.this,);
+                }
+            }
+        });
 
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mAdapter = new ItemAdapter(createItems(), DashBoardActivity.this);
-        recyclerView.setAdapter(mAdapter);
-
-        for(int i=0;i<document_id.length;i++)
+        for(int i=0;i<mDocument_id.length;i++)
         {
-            Log.e("Em","document name"+" "+document_id[i]);
+            Log.e("Em","document name"+" "+mDocument_id[i]);
 
             new VerifyPresenter().show(new ResultInterface() {
                 @Override
@@ -93,16 +119,44 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
                 @Override
                 public void onSuccess(Object object)
                 {
-                    Log.e("Em","valid docs");
+//                    Log.e("Em","valid docs");
+//                    mActive="active";
+//                    fragment = new HomeFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("user_id",mDriverid);
+//                    bundle.putString("tokenid",mTokenid);
+//                    bundle.putString("flag",mActive);
+//                    fragment.setArguments(bundle);
+//                    switchFrag(fragment);
+
                 }
 
                 @Override
                 public void onFailed(Object string)
                 {
                     Log.e("Em","invlaid docs!!");
+
+                    mActive="active";
+                    mSwitchCompat.setVisibility(View.VISIBLE);
+                    fragment = new HomeFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("user_id",mDriverid);
+                    bundle.putString("tokenid",mTokenid);
+                    bundle.putString("flag",mActive);
+                    fragment.setArguments(bundle);
+                    switchFrag(fragment);
+
                 }
-            },DashBoardActivity.this,mDriverid,document_id[i],document_name[i]);
+            },DashBoardActivity.this,mDriverid,mDocument_id[i],mTokenid);
         }
+
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mAdapter = new ItemAdapter(createItems(), DashBoardActivity.this);
+        recyclerView.setAdapter(mAdapter);
 
 
 
@@ -125,6 +179,35 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
             }
         });
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem item = menu.findItem(R.id.myswitch);
+        item.setActionView(R.layout.switch_on_off);
+//        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        TextView textBtn = getTextButton("testing");
+        return true;
+    }
+
+    public TextView getTextButton (String btn_title) {
+        TextView textBtn = new TextView(this);
+        textBtn.setText(btn_title);
+        textBtn.setTextColor(Color.BLACK);
+        textBtn.setTextSize(18);
+        textBtn.setTypeface(Typeface.create("sans-serif-light", Typeface.BOLD));
+        textBtn.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+//        Drawable img = btn_image;
+//        img.setBounds(0, 0, 30, 30);
+        textBtn.setCompoundDrawables(null, null, null, null);
+        // left,top,right,bottom. In this case icon is right to the text
+
+        return textBtn;
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener=
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -188,6 +271,8 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
     {
 //        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
+
+
 }
 
 

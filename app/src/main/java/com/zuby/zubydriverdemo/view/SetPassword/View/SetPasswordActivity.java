@@ -2,7 +2,11 @@ package com.zuby.zubydriverdemo.view.SetPassword.View;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +23,7 @@ import com.zuby.zubydriverdemo.view.SetPassword.Presenter.SetPasswordPresenter;
  * Created by citymapper-pc5 on 19/5/18.
  */
 
-public class SetPasswordActivity extends Activity
+public class SetPasswordActivity extends AppCompatActivity
 {
     private Bundle mBundle;
     private String mTokenid,mPhonenumber;;
@@ -33,6 +37,9 @@ public class SetPasswordActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_password);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         Log.e("Zuby","setpassword");
 

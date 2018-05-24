@@ -34,7 +34,7 @@
         <activity android:name=".view.DashBoard.View.DashBoardActivity"></activity>
         <activity android:name=".view.DocumentUpload.View.LegalDocActivity"></activity>
         <activity android:name=".view.DocumentUpload.View.AgreementActivity"></activity>
-
+        <activity android:name=".view.DocumentUpload.View.UploadProfilePhotoActivity"></activity>
 
         <receiver android:name="com.zuby.zubydriverdemo.Receiver.SmsReceiver">
             <intent-filter>

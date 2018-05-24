@@ -3,8 +3,12 @@ package com.zuby.zubydriverdemo.view.Registration.View;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -26,7 +30,7 @@ import java.util.regex.Pattern;
  * Created by citymapper-pc5 on 18/5/18.
  */
 
-public class RegistrationActivity extends Activity
+public class RegistrationActivity extends AppCompatActivity
 {
     private Bundle mBundle;
     private String mDriverid,mTokenid,mMobileno;
@@ -40,6 +44,9 @@ public class RegistrationActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         progressBar=findViewById(R.id.progressBar);
         et_firstname=findViewById(R.id.et_firstname);

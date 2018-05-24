@@ -16,9 +16,6 @@ public class BaseUrl
 
     public final static String DOCUMENT_SERVICE_URL="http://api.zubyindia.co.in/document_service/";
 
-
-   // public final static String SEND_OTP = " http://ec2-13-210-165-51.ap-southeast-2.compute.amazonaws.com:8000/";
-
-    public final static String DrivingPreference ="http://api.zubyindia.co.in/driver_availability_service/";
+    public final static String DRIVING_PREFERENCE ="http://api.zubyindia.co.in/driver_availability_service/";
 
 }

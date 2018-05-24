@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
@@ -26,6 +27,8 @@
             <TextView
                 android:id="@+id/document_name"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:text="::::::::::::TESTING:::::::::::"
                 android:textColor="#000000"
                 android:paddingLeft="16dp"
                 android:layout_weight="1.6"

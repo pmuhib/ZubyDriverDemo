@@ -36,7 +36,7 @@ public class DocumentUploadPresenter
         map.put("driver_id",mDriverid);
         map.put("document_id",mDocumentid);
         map.put("document_expiry",mDocumentExpiry);
-        map.put("document_image",mDocumentImage);
+        map.put("document_image","data:image/jpeg;base64,"+mDocumentImage);
         map.put("tokenid",mTokenid);
 
         addService(new Gson().toJson(map));
