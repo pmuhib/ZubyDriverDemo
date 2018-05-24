@@ -21,21 +21,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.Registration.View.HomeScreenActivity" />
-        <activity android:name=".view.Registration.View.EnterPhoneNumberActivity" />
-        <activity android:name=".view.Login.View.LoginActivity" />
-        <activity android:name=".view.Registration.View.EnterOtp" />
-        <activity android:name=".view.Registration.View.RegistrationActivity" />
-        <activity android:name=".view.SetPassword.View.SetPasswordActivity" />
-        <activity
-            android:name=".view.DocumentUpload.View.DocumentUploadActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".view.DocumentUpload.View.DocumentPreviewActivity" />
-        <activity android:name=".view.DashBoard.View.DashBoardActivity" />
-        <activity android:name=".view.DocumentUpload.View.LegalDocActivity" />
-        <activity android:name=".view.DocumentUpload.View.AgreementActivity" />
+        <activity android:name=".view.Registration.View.HomeScreenActivity"></activity>
+        <activity android:name=".view.Registration.View.EnterPhoneNumberActivity"></activity>
+        <activity android:name=".view.Login.View.LoginActivity"></activity>
+        <activity android:name=".view.Registration.View.EnterOtp"></activity>
+        <activity android:name=".view.Registration.View.RegistrationActivity"></activity>
+        <activity android:name=".view.SetPassword.View.SetPasswordActivity"></activity>
+        <activity android:name=".view.DocumentUpload.View.DocumentUploadActivity"
+                    android:launchMode="singleTask"></activity>
+        <activity android:name=".view.DocumentUpload.View.DocumentPreviewActivity"></activity>
+        <activity android:name=".view.DashBoard.View.DashBoardActivity"></activity>
+        <activity android:name=".view.DocumentUpload.View.LegalDocActivity"></activity>
+        <activity android:name=".view.DocumentUpload.View.AgreementActivity"></activity>
+        <activity android:name=".view.DocumentUpload.View.UploadProfilePhotoActivity"></activity>
 
-        <receiver android:name=".Receiver.SmsReceiver">
+        <receiver android:name="com.zuby.zubydriverdemo.Receiver.SmsReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>

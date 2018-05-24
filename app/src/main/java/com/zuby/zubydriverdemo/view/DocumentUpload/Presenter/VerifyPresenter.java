@@ -36,6 +36,8 @@ public class VerifyPresenter
         map.put("driver_id",driver_id);
         map.put("document_id",document_id);
         map.put("tokenid",tokenid);
+
+        addService(new Gson().toJson(map));
     }
 
     public void addService(String data)
@@ -62,14 +64,14 @@ public class VerifyPresenter
                 }
                 catch (Exception e)
                 {
-                    mResultinterface.onFailed("No Data Found");
+                    mResultinterface.onFailed(response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<VerifyDocumentModel> call, Throwable t)
             {
-                mResultinterface.onFailed("No Data Found");
+//                mResultinterface.onFailed("No Data Found");
                 Log.d("ZUBY", "" + t);
             }
         });

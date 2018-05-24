@@ -3,9 +3,13 @@ package com.zuby.zubydriverdemo.view.Login.View;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +32,7 @@ import java.util.HashMap;
  * Created by citymapper-pc5 on 18/5/18.
  */
 
-public class LoginActivity extends Activity
+public class LoginActivity extends AppCompatActivity
 {
     private TextView mGetmoving,mButtoncontinue,mForgot_password;
     private EditText mEnterphone,mEnterpassword;
@@ -50,6 +54,9 @@ public class LoginActivity extends Activity
         mEnterphone=findViewById(R.id.enterphone);
         mEnterpassword=findViewById(R.id.enterpassword);
         mForgot_password=findViewById(R.id.forgot_password);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         mGetmoving.setText(Html.fromHtml("Enter your phone <br>"+"number").toString());
 

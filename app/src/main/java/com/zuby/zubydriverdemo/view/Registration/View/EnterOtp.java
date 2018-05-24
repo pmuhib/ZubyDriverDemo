@@ -5,9 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -33,7 +37,7 @@ import java.util.HashMap;
  * Created by citymapper-pc5 on 18/5/18.
  */
 
-public class EnterOtp extends Activity
+public class EnterOtp extends AppCompatActivity
 {
     private Bundle mBundle;
     private String mTokenid,mDriverId,mMobilenumber;
@@ -50,6 +54,9 @@ public class EnterOtp extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.otp);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         progressBar=findViewById(R.id.progressBar);
         mTimer=findViewById(R.id.timer);

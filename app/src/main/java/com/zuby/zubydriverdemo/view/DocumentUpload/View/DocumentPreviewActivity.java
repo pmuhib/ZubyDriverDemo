@@ -8,17 +8,22 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +42,7 @@ import static com.zuby.zubydriverdemo.Utils.Utilities.encodeTobase64;
  * Created by citymapper-pc5 on 20/5/18.
  */
 
-public class DocumentPreviewActivity extends Activity
+public class DocumentPreviewActivity extends AppCompatActivity
 {
     private Button mRetry,mSave_image,mTake_photo;
     private TextView mInstructions,document_name;
@@ -51,6 +56,7 @@ public class DocumentPreviewActivity extends Activity
     private String mDriverid,mTokenid,mDocumentid,mDocument_name;
     private Bundle mBundle;
     private static final int REQUEST_CODE = 99;
+    private ProgressBar progressBarsave;
 
 
     @Override
@@ -65,6 +71,10 @@ public class DocumentPreviewActivity extends Activity
         mImgPreview=findViewById(R.id.imgPreview);
         mTwo_buttons=findViewById(R.id.two_buttons);
         document_name=findViewById(R.id.document_name);
+        progressBarsave=findViewById(R.id.progressBarsave);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         mPreferencemanager =  new PreferenceManager(DocumentPreviewActivity.this);
         map=mPreferencemanager.getLoginDetails();
@@ -76,9 +86,10 @@ public class DocumentPreviewActivity extends Activity
         {
             mTokenid=mBundle.getString("tokenid");
             mDocumentid=mBundle.getString("document_id");
-            mDocument_name=mBundle.getString("documnet_name");
+            mDocument_name=mBundle.getString("document_name");
 
-            Log.e("Em","tokenid in preview"+" "+mTokenid);
+            Log.e("Em","tokenid in preview"+" "+mTokenid+" "+mDocument_name);
+            document_name.setText(mDocument_name);
         }
 
 
@@ -91,12 +102,20 @@ public class DocumentPreviewActivity extends Activity
             }
         });
 
+        mRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                captureImage();
+            }
+        });
+
 
         mSave_image.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                mSave_image.setVisibility(View.GONE);
 
                 new DocumentUploadPresenter().show(new ResultInterface()
                 {
@@ -109,7 +128,8 @@ public class DocumentPreviewActivity extends Activity
                     @Override
                     public void onSuccess(Object object)
                     {
-
+                        mSave_image.setVisibility(View.VISIBLE);
+                        progressBarsave.setVisibility(View.GONE);
                         Intent intent = new Intent(DocumentPreviewActivity.this,DocumentUploadActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("tokenid",mTokenid);
@@ -122,7 +142,8 @@ public class DocumentPreviewActivity extends Activity
 
                     @Override
                     public void onFailed(Object string)
-                    {
+                    {mSave_image.setVisibility(View.VISIBLE);
+                    progressBarsave.setVisibility(View.GONE);
                         Intent intent = new Intent(DocumentPreviewActivity.this,DocumentUploadActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("tokenid",mTokenid);

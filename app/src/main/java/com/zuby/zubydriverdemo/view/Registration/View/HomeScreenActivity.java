@@ -3,6 +3,8 @@ package com.zuby.zubydriverdemo.view.Registration.View;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +16,7 @@ import com.zuby.zubydriverdemo.R;
  * Created by citymapper-pc5 on 17/5/18.
  */
 
-public class HomeScreenActivity extends Activity
+public class HomeScreenActivity extends AppCompatActivity
 {
     private Button mButtonsignin,mButtonregister;
     private Bundle mBundle;
@@ -26,6 +28,9 @@ public class HomeScreenActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         mButtonsignin = findViewById(R.id.sign_in);
         mButtonregister = findViewById(R.id.register);

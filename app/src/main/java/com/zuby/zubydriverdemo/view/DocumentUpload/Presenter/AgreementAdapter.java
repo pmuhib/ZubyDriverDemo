@@ -17,6 +17,11 @@ public class AgreementAdapter extends RecyclerView.Adapter<AgreementAdapter.View
 {
     Context mContext;
 
+    public AgreementAdapter(Context mContext)
+    {
+        this.mContext=mContext;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
@@ -37,7 +42,7 @@ public class AgreementAdapter extends RecyclerView.Adapter<AgreementAdapter.View
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 5;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder

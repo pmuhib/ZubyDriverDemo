@@ -57,6 +57,21 @@ public class RetroClient {
         return retrofit;
     }
 
+
+
+    public static Retrofit getAvailibilityForDriver()
+    {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(4000, TimeUnit.SECONDS)
+                .readTimeout(4000,TimeUnit.SECONDS).build();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BaseUrl.DRIVING_PREFERENCE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit;
+    }
+
 //    public static Retrofit getoken() {
 //        retrofit = new Retrofit.Builder()
 //                .baseUrl(ApiKeys.TOKEN_BASE_URL)

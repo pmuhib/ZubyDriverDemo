@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.zuby.zubydriverdemo.view.DocumentUpload.View.DocumentPreviewActivity;
 import com.zuby.zubydriverdemo.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by citymapper-pc5 on 30/4/18.
  */
@@ -31,13 +33,16 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
     String driverid,city,mTokenid,countrycode,phoneno,sessionlogintype,mDocument_id,mDocument_name;
     private int pos;
     private int click=-1;
+    private ArrayList<DataItem>list;
 
-    public DocumentAdapter(Context context,String mTokenid,String mDocument_id,String mDocument_name/*, ArrayList<BeanForDocs>bitmaplist*//* FragmentActivity fragmentActivity,String driverid,String city,String tokenid,String countrycode,String phoneno,String sessionlogintype,String document_id,String document_name,boolean oncheck,int mFlag,int pos*//*,ClickOfViews clickOfViews*/)
+
+    public DocumentAdapter(Context context,String mTokenid,ArrayList<DataItem>list/*String mDocument_id,String mDocument_name*//*, ArrayList<BeanForDocs>bitmaplist*//* FragmentActivity fragmentActivity,String driverid,String city,String tokenid,String countrycode,String phoneno,String sessionlogintype,String document_id,String document_name,boolean oncheck,int mFlag,int pos*//*,ClickOfViews clickOfViews*/)
     {
         mContext = context;
         this.mTokenid=mTokenid;
-        this.mDocument_id=mDocument_id;
-        this.mDocument_name=mDocument_name;
+//        this.mDocument_id=mDocument_id;
+//        this.mDocument_name=mDocument_name;
+        this.list=list;
         Log.e("Em","tokenid in adapter"+" "+mTokenid);
 
     }
@@ -71,6 +76,8 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
 //        {
 //            holder.next.setVisibility(View.GONE);
 //        }
+        final DataItem dataItem = list.get(position);
+        holder.document_name.setText(dataItem.getDocumentName());
 
         holder.document_card.setOnClickListener(new View.OnClickListener()
         {
@@ -87,8 +94,8 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
                 Intent intent = new Intent(mContext,DocumentPreviewActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("tokenid",mTokenid);
-                bundle.putString("document_id",mDocument_id);
-                bundle.putString("document_name",mDocument_name);
+                bundle.putString("document_id", String.valueOf(dataItem.getDocumentId()));
+                bundle.putString("document_name",dataItem.getDocumentName());
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
 
@@ -100,12 +107,12 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
     public int getItemCount()
     {
 //        return mBitmapList.size();
-            return 2;
+        Log.e("Em","");
+            return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-
         TextView document_name;
         CardView document_card;
         ImageView okay,next;

@@ -7,10 +7,10 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 
-import com.zuby.zubydriverdemo.view.DocumentUpload.Model.CityModel;
+import com.zuby.zubydriverdemo.view.DashBoard.model.DriverAvailabilityModel;
 import com.zuby.zubydriverdemo.view.DocumentUpload.Model.DocumentUploadModel;
-import com.zuby.zubydriverdemo.view.DocumentUpload.Model.GetCityModel;
 import com.zuby.zubydriverdemo.view.DocumentUpload.Model.VerifyDocumentModel;
+import com.zuby.zubydriverdemo.view.DocumentUpload.Presenter.GetCityModelNew2;
 import com.zuby.zubydriverdemo.view.HasPassword.Model.HassPasswordModel;
 import com.zuby.zubydriverdemo.view.Login.Model.LoginModel;
 import com.zuby.zubydriverdemo.view.Registration.Model.NewRegisterModel;
@@ -59,9 +59,6 @@ public interface ApiInterface
     @POST("isSessionValid")
     Call<SessionModel> checkSession(@Body RequestBody title);
 
-    @Headers("Content-Type: application/json")
-    @POST("getDocumentByUserTypeAndCity")
-    Call<GetCityModel> getCityDocs(@Body RequestBody title);
 
     @Headers("Content-Type: application/json")
     @POST("adddriverdocument")
@@ -70,6 +67,16 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST("verifydocument")
     Call<VerifyDocumentModel> VerifyDoc(@Body RequestBody title);
+
+    //For json arrays
+    @Headers("Content-Type: application/json")
+    @POST("getDocumentByUserTypeAndCity")
+    Call<GetCityModelNew2> getCityDocs(@Body RequestBody title);
+
+    //For json arrays
+    @Headers("Content-Type: application/json")
+    @POST("updateDrivingPreference")
+    Call<DriverAvailabilityModel> getdriveravailibility(@Body RequestBody title);
 
 
 }

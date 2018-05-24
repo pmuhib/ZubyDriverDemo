@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -29,20 +31,26 @@ import java.util.HashMap;
  * Created by citymapper-pc5 on 17/5/18.
  */
 
-public class SplashActivity extends Activity implements ResultInterface
+public class SplashActivity extends AppCompatActivity implements ResultInterface
 {
 
     ProgressBar progressBarSplash;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private PreferenceManager mPreferencemanager;
     private HashMap<String,String>map,map2;
+    private HashMap<String,Integer>map3;
     private String mDriverid,mSessionLoginType,mSessionid;
+    private String mDocument_id[],mDocument_name[];
+    private int mArraySizeOfDoc;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         mPreferencemanager = new PreferenceManager(SplashActivity.this);
 
@@ -51,6 +59,15 @@ public class SplashActivity extends Activity implements ResultInterface
         mSessionid = map.get("session_id");
         mDriverid = map.get("user_id");
 
+        map3= mPreferencemanager.getArraySize();
+        mArraySizeOfDoc = map3.get("size");
+        map2 = mPreferencemanager.getDocumentDetails();
+//        for(int i=0;i<mArraySizeOfDoc;i++) {
+//            mDocument_id[i] = map2.get("document_id");
+//            mDocument_name[i] = map2.get("document_name");
+//
+//            Log.e("Em","::::::::document_name::::::"+" "+mDocument_id[i]);
+//        }
         Log.e("Em",":::::shared pref value::::"+" "+mDriverid+" "+mSessionLoginType+" "+mSessionid+" "+mDriverid);
 
         if(Build.VERSION.SDK_INT < 23)
@@ -99,6 +116,7 @@ public class SplashActivity extends Activity implements ResultInterface
                     Intent intent = new Intent(SplashActivity.this,LegalDocActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("tokenid",tokenid);
+                    bundle.putString("user_id",mDriverid);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

@@ -2,7 +2,11 @@ package com.zuby.zubydriverdemo.view.Registration.View;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +28,7 @@ import com.zuby.zubydriverdemo.view.SetPassword.View.SetPasswordActivity;
  * Created by citymapper-pc5 on 18/5/18.
  */
 
-public class EnterPhoneNumberActivity extends Activity
+public class EnterPhoneNumberActivity extends AppCompatActivity
 {
     private EditText mAddnumber;
     private TextView mNext;
@@ -41,6 +45,9 @@ public class EnterPhoneNumberActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterphone);
         progressBar=findViewById(R.id.progressBar);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.hide();
 
         mBundle = getIntent().getExtras();
 
