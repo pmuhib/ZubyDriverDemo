@@ -39,6 +39,7 @@ public class DriverAvailablePresenter
         map.put("time_zone",time_zone);
         map.put("tokenid",tokenid);
 
+        addService(new Gson().toJson(map));
     }
 
     public void addService(String data)
@@ -60,12 +61,12 @@ public class DriverAvailablePresenter
                         Log.e("Zuby","type"+ " "+response.body().getMessage());
                         mResultinterface.onSuccess(response.body());
                     } else {
-                        mResultinterface.onFailed(response.body().getMessage());
+                        mResultinterface.onFailed(response.body());
                     }
                 }
                 catch (Exception e)
                 {
-                    mResultinterface.onFailed(response.body().getMessage());
+                    mResultinterface.onFailed(response.body());
                 }
             }
 

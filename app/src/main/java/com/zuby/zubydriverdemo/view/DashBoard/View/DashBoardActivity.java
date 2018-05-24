@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,12 +50,13 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
     private ActionBar mToolbar;
     private  BottomNavigationView mNavigationView;
     private BottomSheetBehavior mBottomSheetBehavior;
-    private String mTokenid,mDriverid,mActive="";
+    private String mTokenid,mDriverid,mActive="",mStatus="";
     private Bundle mBundle;
     private String mDocument_id[],mDocument_name[];
     private Fragment fragment;
     private ItemAdapter mAdapter;
     private SwitchCompat mSwitchCompat;
+    private ProgressBar progress;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -62,12 +64,7 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         View bottomSheet = findViewById( R.id.recyclerView);
-        mSwitchCompat = findViewById(R.id.switchForActionBar);
-
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayShowTitleEnabled(false);
-        actionbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F9F9F9")));
-
+        progress = findViewById(R.id.progress);
 
         mBundle=getIntent().getExtras();
 
@@ -78,30 +75,103 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
             mTokenid=mBundle.getString("tokenid");
             mDriverid=mBundle.getString("user_id");
 
-            Log.e("Em","mDocumnet"+" "+mDocument_name[1]+ " " +mDocument_id.length);
+            Log.e("Em","mDocumnet"+" "+mDocument_name[1]+ " " +mDocument_id.length+" "+mDriverid);
         }
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayShowTitleEnabled(false);
+        actionbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F9F9F9")));
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.switch_on_off);
+        View view =getSupportActionBar().getCustomView();
+
+        mSwitchCompat = view.findViewById(R.id.switchForActionBar);
+
+        Log.e("Zy","if verified"+" "+mActive);
+
+//        if(mActive.equalsIgnoreCase("active"))
+//        {
+//            mSwitchCompat.setVisibility(View.VISIBLE);
+//        }
+//        else
+//        {
+//            mSwitchCompat.setVisibility(View.GONE);
+//        }
 
         mSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                Log.e("Zuby","ischecked"+" "+isChecked);
+
                 if(isChecked)
                 {
-//                    new DriverAvailablePresenter().show(new ResultInterface() {
-//                        @Override
-//                        public void onSuccess(String object) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onSuccess(Object object) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onFailed(Object string) {
-//
-//                        }
-//                    },DashBoardActivity.this,);
+                    progress.setVisibility(View.VISIBLE);
+                    new DriverAvailablePresenter().show(new ResultInterface() {
+                        @Override
+                        public void onSuccess(String object) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Object object) {
+                            // as soon as the driver checks this switch that means he/she is online
+
+                            mStatus = "online";
+                            Log.e("Zuby","success"+" "+mActive);
+                            progress.setVisibility(View.GONE);
+                            fragment = new HomeFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("user_id",mDriverid);
+                            bundle.putString("tokenid",mTokenid);
+                            bundle.putString("flag",mActive);
+                            bundle.putString("status",mStatus);
+                            fragment.setArguments(bundle);
+                            switchFrag(fragment);
+
+
+                        }
+
+                        @Override
+                        public void onFailed(Object string) {
+                            progress.setVisibility(View.GONE);
+
+                        }
+                    },DashBoardActivity.this,mDriverid,"123","online","Asia/Calcutta",mTokenid);
+                }
+                else
+                { progress.setVisibility(View.VISIBLE);
+                    new DriverAvailablePresenter().show(new ResultInterface() {
+                        @Override
+                        public void onSuccess(String object) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Object object) {
+                            Log.e("Zuby","success"+" "+mActive);
+                            progress.setVisibility(View.GONE);
+            // as soon as the driver comes here he/she is offline
+                            mStatus = "offline";
+                            Log.e("Zuby","success");
+                            progress.setVisibility(View.GONE);
+                            fragment = new HomeFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("user_id",mDriverid);
+                            bundle.putString("tokenid",mTokenid);
+                            bundle.putString("flag",mActive);
+                            bundle.putString("status",mStatus);
+                            fragment.setArguments(bundle);
+                            switchFrag(fragment);
+                        }
+
+                        @Override
+                        public void onFailed(Object string) {
+                            progress.setVisibility(View.GONE);
+                        }
+                    },DashBoardActivity.this,mDriverid,"123","offline","Asia/Calcutta",mTokenid);
                 }
             }
         });
@@ -120,15 +190,18 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
                 @Override
                 public void onSuccess(Object object)
                 {
-//                    Log.e("Em","valid docs");
-//                    mActive="active";
-//                    fragment = new HomeFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("user_id",mDriverid);
-//                    bundle.putString("tokenid",mTokenid);
-//                    bundle.putString("flag",mActive);
-//                    fragment.setArguments(bundle);
-//                    switchFrag(fragment);
+                    // Here also it will switch to Homefragment but without any status information it will only show image of city in next page and welcome sign
+                    Log.e("Em","valid docs");
+                    mActive="active";
+                    progress.setVisibility(View.GONE);
+                    fragment = new HomeFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("user_id",mDriverid);
+                    bundle.putString("tokenid",mTokenid);
+                    bundle.putString("flag",mActive);
+                    bundle.putString("status",mStatus);
+                    fragment.setArguments(bundle);
+                    switchFrag(fragment);
 
                 }
 
@@ -182,32 +255,19 @@ public class DashBoardActivity extends AppCompatActivity implements ItemAdapter.
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        MenuItem item = menu.findItem(R.id.myswitch);
-        item.setActionView(R.layout.switch_on_off);
-//        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        TextView textBtn = getTextButton("testing");
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu)
+//    {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        MenuItem item = menu.findItem(R.id.myswitch);
+//        item.setActionView(R.layout.switch_on_off);
+////        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+//        TextView textBtn = getTextButton("testing");
+//        return true;
+//    }
 
-    public TextView getTextButton (String btn_title) {
-        TextView textBtn = new TextView(this);
-        textBtn.setText(btn_title);
-        textBtn.setTextColor(Color.BLACK);
-        textBtn.setTextSize(18);
-        textBtn.setTypeface(Typeface.create("sans-serif-light", Typeface.BOLD));
-        textBtn.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-//        Drawable img = btn_image;
-//        img.setBounds(0, 0, 30, 30);
-        textBtn.setCompoundDrawables(null, null, null, null);
-        // left,top,right,bottom. In this case icon is right to the text
 
-        return textBtn;
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener=
             new BottomNavigationView.OnNavigationItemSelectedListener() {

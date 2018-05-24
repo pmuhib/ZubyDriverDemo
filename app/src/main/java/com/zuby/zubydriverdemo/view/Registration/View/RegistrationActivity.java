@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.zuby.zubydriverdemo.Utils.PreferenceManager;
 import com.zuby.zubydriverdemo.view.DocumentUpload.View.LegalDocActivity;
 import com.zuby.zubydriverdemo.view.Login.Presenter.LoginPresenter;
 import com.zuby.zubydriverdemo.view.Login.View.LoginActivity;
@@ -38,12 +39,15 @@ public class RegistrationActivity extends AppCompatActivity
     private TextView mRegistrationclick;
     private ProgressBar progressBar;
     private boolean mPasswordValue;
+    private PreferenceManager mPreferencemanager;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        mPreferencemanager = new PreferenceManager(RegistrationActivity.this);
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.hide();
@@ -60,6 +64,8 @@ public class RegistrationActivity extends AppCompatActivity
 
         mPasswordValue = isValidPassword(et_password.getText().toString());
 
+        mPreferencemanager.saveDriverFullName(et_firstname.getText().toString(),et_lastname.getText().toString());
+
         mBundle = getIntent().getExtras();
 
         if(mBundle!=null)
@@ -72,6 +78,7 @@ public class RegistrationActivity extends AppCompatActivity
             et_phonenumber.setText(mMobileno);
             et_phonenumber.setEnabled(false);
         }
+
 
 
         mRegistrationclick.setOnClickListener(new View.OnClickListener()
@@ -156,30 +163,6 @@ public class RegistrationActivity extends AppCompatActivity
         });
 
 
-    }
-
-    private void dialogBox()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Password not valid! Please enter 1 special character,one Uppercase letter, one number and length of password should be more than 8")
-                .setTitle("Warning");
-
-
-
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
-            }
-        });
-
-//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                // User clicked cancel button
-//            }
-//        });
-
-        AlertDialog alert =builder.create();
-        alert.show();
     }
 
     public static boolean isValidPassword(final String password)

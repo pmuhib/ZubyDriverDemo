@@ -118,8 +118,8 @@ public class EnterPhoneNumberActivity extends AppCompatActivity
 
                                         HassPasswordModel haspassword = (HassPasswordModel)object;
 
-                                        Log.e("Zuby","haspassword"+" "+haspassword.getMessage());
-                                        if(haspassword.getMessage().equalsIgnoreCase("success"))
+                                        Log.e("Zuby","haspassword"+" "+haspassword.getMessage()+" "+haspassword.getType());
+                                        if(haspassword.getMessage().equalsIgnoreCase("yes"))
                                         {
                                             Intent intent = new Intent(EnterPhoneNumberActivity.this,LoginActivity.class);
                                             Bundle bundle = new Bundle();
@@ -190,7 +190,7 @@ public class EnterPhoneNumberActivity extends AppCompatActivity
                                               HassPasswordModel haspassword = (HassPasswordModel)object;
 
                                               Log.e("Zuby","haspassword"+" "+haspassword.getMessage());
-                                              if(haspassword.getMessage().equalsIgnoreCase("success"))
+                                              if(haspassword.getType().equalsIgnoreCase("success"))
                                               {
                                                   Intent intent = new Intent(EnterPhoneNumberActivity.this,LoginActivity.class);
                                                   Bundle bundle = new Bundle();
