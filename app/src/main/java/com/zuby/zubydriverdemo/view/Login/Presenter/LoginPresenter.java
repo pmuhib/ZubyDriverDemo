@@ -70,24 +70,24 @@ public class LoginPresenter
                     {
                     Log.e("Zuby","type"+ " "+response.body().getMessage());
                         mPreferenceManager = new PreferenceManager(mContext);
-                        mPreferenceManager.saveLoginDetails(response.body().getDatademo().getSession_id(),response.body().getDatademo().getSession_login_type(),response.body().getDatademo().getUser_id());
+                        mPreferenceManager.saveLoginDetails(response.body().getData().getSession_id(),response.body().getData().getSession_login_type(),response.body().getData().getUser_id());
 
                         mResultInterface.onSuccess(response.body());
 
                     } else {
-                        mResultInterface.onFailed(response.message());
+                        mResultInterface.onFailed(response.body());
                     }
                 }
                 catch (Exception e)
                 {
-                    mResultInterface.onFailed("No Data Found");
+                    mResultInterface.onFailed(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<LoginModel> call, Throwable t)
             {
-                mResultInterface.onFailed("No Data Found");
+//                mResultInterface.onFailed("No Data Found");
                 Log.d("ZUBY", "" + t);
             }
         });

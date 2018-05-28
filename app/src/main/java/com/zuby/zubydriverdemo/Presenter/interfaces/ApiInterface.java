@@ -12,6 +12,7 @@ import com.zuby.zubydriverdemo.view.DocumentUpload.Model.DocumentUploadModel;
 import com.zuby.zubydriverdemo.view.DocumentUpload.Model.VerifyDocumentModel;
 import com.zuby.zubydriverdemo.view.DocumentUpload.Presenter.GetCityModelNew2;
 import com.zuby.zubydriverdemo.view.HasPassword.Model.HassPasswordModel;
+import com.zuby.zubydriverdemo.view.Login.Model.DeviceTokenModel;
 import com.zuby.zubydriverdemo.view.Login.Model.LoginModel;
 import com.zuby.zubydriverdemo.view.Registration.Model.NewRegisterModel;
 import com.zuby.zubydriverdemo.view.Registration.Model.OtpVerified;
@@ -54,6 +55,9 @@ public interface ApiInterface
 //    @Headers("Content-Type: application/json")
     @POST("login")
     Call<LoginModel> setLogin(@Body RequestBody title);
+
+    @POST("getDeviceId")
+    Call<DeviceTokenModel> getDeviceToken(@Body RequestBody title);
 
     @Headers("Content-Type: application/json")
     @POST("isSessionValid")

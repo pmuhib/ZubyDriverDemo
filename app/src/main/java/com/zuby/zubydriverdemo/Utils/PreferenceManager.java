@@ -55,13 +55,13 @@ public class PreferenceManager
         editor.commit();
     }
 
-    public void saveLevel2Details(String countrycode,String mobileno,String access_type,String status,String userid)
+    public void saveLevel2Details(String userid,String driver_access)
     {
-        editor.putString("country_code",countrycode);
-        editor.putString("mobile_no",mobileno);
-        editor.putString("access_type",access_type);
-        editor.putString("status",status);
+//        editor.putString("country_code",countrycode);
+//        editor.putString("mobile_no",mobileno);
+//        editor.putString("access_type",access_type);
         editor.putString("user_id",userid);
+        editor.putString("driver_access",driver_access);
         editor.commit();
     }
 
@@ -73,7 +73,6 @@ public class PreferenceManager
         map.put("first_name",pref.getString("first_name",null));
         map.put("last_name",pref.getString("last_name",null));
         map.put("access_type",pref.getString("access_type",null));
-        map.put("status",pref.getString("status",null));
         map.put("userid",pref.getString("userid",null));
 
         return map;
@@ -149,6 +148,19 @@ public class PreferenceManager
         HashMap<String,String>map = new HashMap<>();
         map.put("first_name",pref.getString("first_name",null));
         map.put("last_name",pref.getString("last_name",null));
+        return map;
+    }
+
+    public void setDeviceToken(String token)
+    {
+        editor.putString("device_token",token);
+        editor.commit();
+    }
+
+    public HashMap<String,String>getDeviceToken()
+    {
+        HashMap<String,String>map = new HashMap<>();
+        map.put("device_token",pref.getString("device_token",null));
         return map;
     }
 

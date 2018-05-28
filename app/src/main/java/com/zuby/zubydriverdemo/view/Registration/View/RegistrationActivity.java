@@ -89,7 +89,8 @@ public class RegistrationActivity extends AppCompatActivity
                 if (isValidPassword(et_password.getText().toString()) && et_firstname.getText().toString().length()>0 && et_lastname.getText().toString().length()>0 && et_city.getText().toString().length()>0)
                 {
                     progressBar.setVisibility(View.VISIBLE);
-                new RegisterPresenter().show(new ResultInterface() {
+                    new RegisterPresenter().show(new ResultInterface()
+                    {
                     @Override
                     public void onSuccess(String object) {
 

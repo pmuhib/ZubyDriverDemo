@@ -51,7 +51,6 @@ public class RegisterPresenter
     public void addService(String data)
     {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), data);
-//        Retrofit client = RetroClient.ridermanagementurl();
         ApiInterface mApiService = RetroClient.getClient().create(ApiInterface.class);
         Call<RegistrationModel> addService = mApiService.setRegistration(requestBody);
         addService.enqueue(new Callback<RegistrationModel>()
@@ -63,19 +62,21 @@ public class RegisterPresenter
                 try
                 {
                     Log.e("ZUBY", new Gson().toJson(response.body()));
-                    if (response.code()==200)
+                    if (response.code()==200 && response.body().getType().equalsIgnoreCase("success"))
                     {
                     Log.e("Zuby","type"+ " "+response.body().getType());
 
                        Data data = new Data();
                        data.setUserId(response.body().getData().getUser_id());
-                       data.setStatus(response.body().getData().getStatus());
-                       data.setMobileNo(response.body().getData().getMobile_no());
-                       data.setCountryCode(response.body().getData().getCountry_code());
-                       data.setAccesstype(response.body().getData().getAccess_type());
+//                       data.setStatus(response.body().getData().getStatus());
+//                       data.setMobileNo(response.body().getData().);
+//                       data.setCountryCode(response.body().getData().getCountry_code());
+//                       data.setAccesstype(response.body().getData().getAccess_type());
+
+//                       response.body().
 
                         mPreferencemanager = new PreferenceManager(mContext);
-                        mPreferencemanager.saveLevel2Details(response.body().getData().getCountry_code(),response.body().getData().getMobile_no(),response.body().getData().getAccess_type(),response.body().getData().getStatus(),response.body().getData().getUser_id());
+                        mPreferencemanager.saveLevel2Details(response.body().getData().getUser_id(),response.body().getDriver_access());
 
 
                     mResultInterface.onSuccess(response.body().getData());

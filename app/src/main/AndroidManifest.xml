@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zuby.zubydriverdemo">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,11 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDabrIQNzwQO9rTXb_LFaZZUMl06BmH7Lk"/>
+            android:value="AIzaSyBEuRZ7zUOfmnW-J8EGNdOzpK50E2S3MaI"/>
+        <meta-data
+            android:name="SERVER_KEY"
+            android:value="AAAA0ITQ0sU:APA91bE-fSjA6wnrA27iQhXHADt-1UbLgRWER6Mw7Sa3OSNDS97IsMw3FfKuFXWvtXrsY5pMwaCziaabaqkZ5XaeCVDwCdeNFFf2aDwv8EbJkWQBzU8jee1nwTBcabLZ8KtfAfLARQbn"
+            ></meta-data>
 
         <activity android:name=".view.Registration.View.SplashActivity">
             <intent-filter>
@@ -49,6 +54,22 @@
         </receiver>
 
         <activity android:name=".view.DashBoard.View.view.EditProfileActivity"></activity>
+
+        <receiver
+            android:name="com.zuby.zubydriverdemo.notification.model.presenter.FirebaseDataReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.zuby.zubydriverdemo.notification.model.presenter.MyFirebaseInstanceIDService"><intent-filter><action android:name="com.google.firebase.INSTANCE_ID_EVENT"/></intent-filter></service><service android:name="com.zuby.zubydriverdemo.notification.model.presenter.FirebaseMessaging"><intent-filter><action android:name="com.google.firebase.MESSAGING_EVENT"/></intent-filter></service>
+
+        <!--<service android:name="com.zuby.zubydriverdemo.notification.model.presenter.MyFirebaseInstanceIDService"><intent-filter><action android:name="com.google.firebase.INSTANCE_ID_EVENT"/></intent-filter></service>-->
+
+        <!--<service android:name="com.zuby.zubydriverdemo.notification.model.presenter.FirebaseMessaging"><intent-filter><action android:name="com.google.firebase.MESSAGING_EVENT"/></intent-filter></service>-->
+
     </application>
 
 </manifest>

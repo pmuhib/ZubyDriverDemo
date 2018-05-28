@@ -11,15 +11,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zuby.zubydriverdemo.view.DocumentUpload.View.DocumentUploadActivity;
 import com.zuby.zubydriverdemo.view.DocumentUpload.View.LegalDocActivity;
+import com.zuby.zubydriverdemo.view.Login.Model.DeviceTokenModel;
 import com.zuby.zubydriverdemo.view.Login.Model.LoginModel;
+import com.zuby.zubydriverdemo.view.Login.Presenter.DeviceTokenPresenter;
 import com.zuby.zubydriverdemo.view.Login.Presenter.LoginPresenter;
 import com.zuby.zubydriverdemo.Presenter.interfaces.ResultInterface;
 import com.zuby.zubydriverdemo.R;
@@ -70,6 +74,11 @@ public class LoginActivity extends AppCompatActivity
         map = mPreferencemanager.getDriverId();
         mDriverid = map.get("userid");
 
+        Log.e("Em","login"+mDriverid);
+
+        String myVersion = android.os.Build.VERSION.RELEASE;
+        mAndroidVersion=myVersion;
+
         mBundle = getIntent().getExtras();
 
         if(mBundle!=null)
@@ -78,8 +87,27 @@ public class LoginActivity extends AppCompatActivity
         }
 
 
-        // Android version
-        mAndroidVersion = android.os.Build.VERSION.RELEASE;
+        new DeviceTokenPresenter().show(new ResultInterface() {
+            @Override
+            public void onSuccess(String object) {
+
+            }
+
+            @Override
+            public void onSuccess(Object object) {
+
+                DeviceTokenModel deviceTokenModel = (DeviceTokenModel) object;
+
+                Log.e("Zy","::::::::::::deviceTokenModel:::::::"+" "+deviceTokenModel.getData());
+
+            }
+
+            @Override
+            public void onFailed(Object string) {
+
+            }
+        },LoginActivity.this,mDriverid,"driver_session",mTokenid);
+
 
 
         mForgot_password.setOnClickListener(new View.OnClickListener()
@@ -138,9 +166,9 @@ public class LoginActivity extends AppCompatActivity
                         @Override
                         public void onFailed(Object string)
                         {
-
+                            Toast.makeText(LoginActivity.this,"Login failed!!",Toast.LENGTH_LONG).show();
                         }
-                    },LoginActivity.this,"+91",mEnterphone.getText().toString(),mEnterpassword.getText().toString(),"Android","driver_android",mAndroidVersion,"driver_session","1","Asia/Calcutta",mTokenid,mMacAddress);
+                    },LoginActivity.this,"+91",mEnterphone.getText().toString(),mEnterpassword.getText().toString(),"Android","rider_android",mAndroidVersion,"rider_session","1","Asia/Calcutta",mTokenid,mMacAddress);
                 }
 
             }

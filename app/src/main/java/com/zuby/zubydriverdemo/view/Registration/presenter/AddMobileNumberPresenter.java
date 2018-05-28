@@ -29,13 +29,14 @@ public class AddMobileNumberPresenter
     private Context mContext;
     private PreferenceManager mPreferencemanager;
 
-    public void show(ResultInterface mResultInterface,Context mContext,String countrycode,String mobilenumber,String timeZone,String TOKENID)
+    public void show(ResultInterface mResultInterface,Context mContext,String countrycode,String mobilenumber,String timeZone,String TOKENID,String access_type)
     {
         HashMap<String,String> map = new HashMap<>();
         map.put("country_code",countrycode);
         map.put("mobile_no",mobilenumber);
         map.put("time_zone",timeZone);
         map.put("tokenid",TOKENID);
+        map.put("access_type",access_type);
 
         this.mResultInterface= mResultInterface;
         this.mContext=mContext;
@@ -56,7 +57,7 @@ public class AddMobileNumberPresenter
                                    Response<NewRegisterModel> response) {
                 try {
                     Log.e("ZUBY", new Gson().toJson(response.body()));
-                    if (response.code() == 200 && response.body().getData().getStatus().equalsIgnoreCase("success") && response.body().getType().equalsIgnoreCase("success")) {
+                    if (response.code() == 200 &&  response.body().getType().equalsIgnoreCase("success")) {
 
                         // driver id will only be saved for the first time i.e, if we get mobile number already exists then we will not get anyu ddriver id
                         mPreferencemanager = new PreferenceManager(mContext);
@@ -65,7 +66,6 @@ public class AddMobileNumberPresenter
                         data.setCountryCode(response.body().getData().getCountry_code());
                         data.setMobileNo(response.body().getData().getMobile_no());
                         data.setRegistrationTime(response.body().getData().getRegistration_time());
-                        data.setStatus(response.body().getData().getStatus());
                         data.setTimeZone(response.body().getData().getTime_zone());
                         data.setUserId(response.body().getData().getUser_id());
 //                        data.setType(response.body().getType());

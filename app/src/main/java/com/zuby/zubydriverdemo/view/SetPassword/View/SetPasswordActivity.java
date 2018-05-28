@@ -72,20 +72,20 @@ public class SetPasswordActivity extends AppCompatActivity
                     {
 
                         SetPasswordModel setPasswordModel =(SetPasswordModel)object;
-                        if(setPasswordModel.getType().equalsIgnoreCase("success"))
-                        {
+//                        if(setPasswordModel.getType().equalsIgnoreCase("success"))
+//                        {
                             Intent intent = new Intent(SetPasswordActivity.this, LoginActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("tokenid",mTokenid);
                             startActivity(intent);
-                        }
-                        else
-                        {
+//                        }
+//                        else
+//                        {
 
                             // Yahan activity back pr jani chahiye
 
-                            Toast.makeText(SetPasswordActivity.this,setPasswordModel.getMessage(),Toast.LENGTH_LONG).show();
-                        }
+//                            Toast.makeText(SetPasswordActivity.this,setPasswordModel.getMessage(),Toast.LENGTH_LONG).show();
+//                        }
 
 
                     }

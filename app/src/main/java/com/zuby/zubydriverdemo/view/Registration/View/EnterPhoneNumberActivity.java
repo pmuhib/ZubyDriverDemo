@@ -97,13 +97,153 @@ public class EnterPhoneNumberActivity extends AppCompatActivity
                         public void onSuccess(Object object)
                         {
 
-                            Data data = (Data) object;
+                            NewRegisterModel data = (NewRegisterModel) object;
                             progressBar.setVisibility(View.GONE);
                             mNext.setVisibility(View.GONE);
-                            Log.e("Zuby", "object" + " " + object + " " + data.getStatus() + " " + data.getUserId()/*+" "+data.getType()*/);
-                            if (data!=null && data.getStatus().equalsIgnoreCase("active") )
-                            {
+                            Log.e("Zuby", "object" + " " + object + " " + data.getData().getDriver_access());
 
+                            if(data.getData().getDriver_access().equalsIgnoreCase("pending 0"))
+//                                      Log.e("Zuby", "inactive"+" "+level1RegisterModel.getData().getUser_id());
+                            {
+                                Intent intent = new Intent(EnterPhoneNumberActivity.this, EnterOtp.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("tokenid", mTokenid);
+                                bundle.putString("mobilenumber", mAddnumber.getText().toString());
+                                bundle.putString("userid", data.getData().getUser_id());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+
+//                            if (data!=null && data.getStatus().equalsIgnoreCase("active") )
+//                            {
+
+//                                new HassPasswordPresenter().show(new ResultInterface()
+//                                {
+//                                    @Override
+//                                    public void onSuccess(String object)
+//                                    {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onSuccess(Object object)
+//                                    {
+//
+//                                        HassPasswordModel haspassword = (HassPasswordModel)object;
+//
+//                                        Log.e("Zuby","haspassword"+" "+haspassword.getMessage()+" "+haspassword.getType());
+//                                        if(haspassword.getMessage().equalsIgnoreCase("yes"))
+//                                        {
+//                                            Intent intent = new Intent(EnterPhoneNumberActivity.this,LoginActivity.class);
+//                                            Bundle bundle = new Bundle();
+//                                            bundle.putString("tokenid",mTokenid);
+//                                            intent.putExtras(bundle);
+//                                            startActivity(intent);
+//                                        }
+//                                        else
+//                                        {
+//                                            Intent intent = new Intent(EnterPhoneNumberActivity.this, SetPasswordActivity.class);
+//                                            Bundle bundle = new Bundle();
+//                                            bundle.putString("tokenid",mTokenid);
+//                                            bundle.putString("mobile_no",mAddnumber.getText().toString());
+//                                            intent.putExtras(bundle);
+//                                            startActivity(intent);
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onFailed(Object string)
+//                                    {
+//
+//                                    }
+//                                },EnterPhoneNumberActivity.this,"+91",mAddnumber.getText().toString(),mTokenid);
+
+
+//                            }
+//                            else if(data.getStatus().equalsIgnoreCase("active")/* && data.getType().equalsIgnoreCase("failure")*/)
+//                            {
+//                                    Intent intent = new Intent(EnterPhoneNumberActivity.this,LoginActivity.class);
+//                                    startActivity(intent);
+//                            }
+//                            else
+//                            {
+//
+//                            }
+
+//                            Log.e("Em", "mobile number" + " " + data.getMobileNo());
+
+
+                        }
+
+                        @Override
+                        public void onFailed(Object object)
+                        {
+
+                            progressBar.setVisibility(View.GONE);
+                            mNext.setVisibility(View.GONE);
+
+                            NewRegisterModel level1RegisterModel = (NewRegisterModel)object;
+//                                Log.e("Em","object failure"+" "+level1RegisterModel.getType()+" "+level1RegisterModel.getMessage());
+
+//                                  if(level1RegisterModel.getType().equalsIgnoreCase("failure") && level1RegisterModel.getMessage().equalsIgnoreCase("Mobile no. already exists") /*&& level1RegisterModel.getData().getStatus().equalsIgnoreCase("active")*/)
+//                                  {
+//
+//                                      new HassPasswordPresenter().show(new ResultInterface()
+//                                      {
+//                                          @Override
+//                                          public void onSuccess(String object)
+//                                          {
+//
+//                                          }
+//
+//                                          @Override
+//                                          public void onSuccess(Object object)
+//                                          {
+//
+//                                              HassPasswordModel haspassword = (HassPasswordModel)object;
+//
+//                                              Log.e("Zuby","haspassword"+" "+haspassword.getMessage());
+//                                              if(haspassword.getType().equalsIgnoreCase("success"))
+//                                              {
+//                                                  Intent intent = new Intent(EnterPhoneNumberActivity.this,LoginActivity.class);
+//                                                  Bundle bundle = new Bundle();
+//                                                  bundle.putString("tokenid",mTokenid);
+//                                                  intent.putExtras(bundle);
+//                                                  startActivity(intent);
+//                                              }
+//                                              else
+//                                              {
+//                                                  Intent intent = new Intent(EnterPhoneNumberActivity.this, SetPasswordActivity.class);
+//                                                  Bundle bundle = new Bundle();
+//                                                  bundle.putString("tokenid",mTokenid);
+//                                                  bundle.putString("mobile_no",mAddnumber.getText().toString());
+//                                                  intent.putExtras(bundle);
+//                                                  startActivity(intent);
+//                                              }
+//                                          }
+//
+//                                          @Override
+//                                          public void onFailed(Object string)
+//                                          {
+//
+//                                          }
+//                                      },EnterPhoneNumberActivity.this,"+91",mAddnumber.getText().toString(),mTokenid);
+//                                  }
+//                                  else if(level1RegisterModel.getType().equalsIgnoreCase("success")/*&&  level1RegisterModel.getData().getStatus().equalsIgnoreCase("inactive")*/)
+//                                  {
+                            if(level1RegisterModel.getData().getDriver_access().equalsIgnoreCase("pending 0"))
+//                                      Log.e("Zuby", "inactive"+" "+level1RegisterModel.getData().getUser_id());
+                            {
+                                Intent intent = new Intent(EnterPhoneNumberActivity.this, EnterOtp.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("tokenid", mTokenid);
+                                bundle.putString("mobilenumber", mAddnumber.getText().toString());
+                                bundle.putString("userid", level1RegisterModel.getData().getUser_id());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                            else if(level1RegisterModel.getData().getDriver_access().equalsIgnoreCase("pending 2"))
+                            {
                                 new HassPasswordPresenter().show(new ResultInterface()
                                 {
                                     @Override
@@ -145,105 +285,24 @@ public class EnterPhoneNumberActivity extends AppCompatActivity
                                     }
                                 },EnterPhoneNumberActivity.this,"+91",mAddnumber.getText().toString(),mTokenid);
 
-
                             }
-//                            else if(data.getStatus().equalsIgnoreCase("active")/* && data.getType().equalsIgnoreCase("failure")*/)
-//                            {
-//                                    Intent intent = new Intent(EnterPhoneNumberActivity.this,LoginActivity.class);
-//                                    startActivity(intent);
-//                            }
-//                            else
-//                            {
+//                                  }
+//                                  else
+//                                  {
 //
-//                            }
-
-//                            Log.e("Em", "mobile number" + " " + data.getMobileNo());
-
-
-                        }
-
-                        @Override
-                        public void onFailed(Object object)
-                        {
-
-                            progressBar.setVisibility(View.GONE);
-                            mNext.setVisibility(View.GONE);
-
-                            NewRegisterModel level1RegisterModel = (NewRegisterModel)object;
-                                Log.e("Em","object failure"+" "+level1RegisterModel.getType()+" "+level1RegisterModel.getMessage()+" "+level1RegisterModel.getData().getStatus());
-
-                                  if(level1RegisterModel.getType().equalsIgnoreCase("failure") && level1RegisterModel.getMessage().equalsIgnoreCase("Mobile no. already exists") && level1RegisterModel.getData().getStatus().equalsIgnoreCase("active"))
-                                  {
-
-                                      new HassPasswordPresenter().show(new ResultInterface()
-                                      {
-                                          @Override
-                                          public void onSuccess(String object)
-                                          {
-
-                                          }
-
-                                          @Override
-                                          public void onSuccess(Object object)
-                                          {
-
-                                              HassPasswordModel haspassword = (HassPasswordModel)object;
-
-                                              Log.e("Zuby","haspassword"+" "+haspassword.getMessage());
-                                              if(haspassword.getType().equalsIgnoreCase("success"))
-                                              {
-                                                  Intent intent = new Intent(EnterPhoneNumberActivity.this,LoginActivity.class);
-                                                  Bundle bundle = new Bundle();
-                                                  bundle.putString("tokenid",mTokenid);
-                                                  intent.putExtras(bundle);
-                                                  startActivity(intent);
-                                              }
-                                              else
-                                              {
-                                                  Intent intent = new Intent(EnterPhoneNumberActivity.this, SetPasswordActivity.class);
-                                                  Bundle bundle = new Bundle();
-                                                  bundle.putString("tokenid",mTokenid);
-                                                  bundle.putString("mobile_no",mAddnumber.getText().toString());
-                                                  intent.putExtras(bundle);
-                                                  startActivity(intent);
-                                              }
-                                          }
-
-                                          @Override
-                                          public void onFailed(Object string)
-                                          {
-
-                                          }
-                                      },EnterPhoneNumberActivity.this,"+91",mAddnumber.getText().toString(),mTokenid);
-                                  }
-                                  else if(level1RegisterModel.getType().equalsIgnoreCase("success")&&  level1RegisterModel.getData().getStatus().equalsIgnoreCase("inactive"))
-                                  {
-                                      Log.e("Zuby", "inactive"+" "+level1RegisterModel.getData().getUser_id());
-
-                                      Intent intent = new Intent(EnterPhoneNumberActivity.this, EnterOtp.class);
-                                      Bundle bundle = new Bundle();
-                                      bundle.putString("tokenid", mTokenid);
-                                      bundle.putString("mobilenumber", mAddnumber.getText().toString());
-                                      bundle.putString("userid", "CAB3325_00000004");
-                                      intent.putExtras(bundle);
-                                      startActivity(intent);
-                                  }
-                                  else
-                                  {
-
-                                      Log.e("Zuby", "inactive"+" "+level1RegisterModel.getData().getUser_id());
-                                      Intent intent = new Intent(EnterPhoneNumberActivity.this, EnterOtp.class);
-                                      Bundle bundle = new Bundle();
-                                      bundle.putString("tokenid", mTokenid);
-                                      bundle.putString("mobilenumber", mAddnumber.getText().toString());
-                                      bundle.putString("userid", level1RegisterModel.getData().getUser_id());
-                                      intent.putExtras(bundle);
-                                      startActivity(intent);
-                                  }
+//                                      Log.e("Zuby", "inactive"+" "+level1RegisterModel.getData().getUser_id());
+//                                      Intent intent = new Intent(EnterPhoneNumberActivity.this, EnterOtp.class);
+//                                      Bundle bundle = new Bundle();
+//                                      bundle.putString("tokenid", mTokenid);
+//                                      bundle.putString("mobilenumber", mAddnumber.getText().toString());
+//                                      bundle.putString("userid", level1RegisterModel.getData().getUser_id());
+//                                      intent.putExtras(bundle);
+//                                      startActivity(intent);
+//                                  }
 
 
                         }
-                    }, EnterPhoneNumberActivity.this, "+91", mAddnumber.getText().toString(), "Asia/Calcutta", mTokenid);
+                    }, EnterPhoneNumberActivity.this, "+91", mAddnumber.getText().toString(), "Asia/Calcutta", mTokenid,"driver");
 
                 }
                 }

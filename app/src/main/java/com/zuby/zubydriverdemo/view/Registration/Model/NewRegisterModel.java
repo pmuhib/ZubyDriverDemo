@@ -7,10 +7,11 @@ package com.zuby.zubydriverdemo.view.Registration.Model;
 public class NewRegisterModel
 {
 
+
     /**
-     * type : failure
-     * message : Mobile no. already exists
-     * data : {"user_id":"","mobile_no":"9461132327","registration_time":"","time_zone":"Asia/Calcutta","country_code":"91","status":"inactive"}
+     * type : success
+     * message :
+     * data : {"user_id":"CAB2149_00000001","mobile_no":"8279632149","registration_time":"2018-05-27 00:16:06","time_zone":"Asia/Calcutta","country_code":"91","rider_access":"no_access","driver_access":"pending","owner_access":"no_access"}
      */
 
     private String type;
@@ -43,12 +44,14 @@ public class NewRegisterModel
 
     public static class DataBean {
         /**
-         * user_id :
-         * mobile_no : 9461132327
-         * registration_time :
+         * user_id : CAB2149_00000001
+         * mobile_no : 8279632149
+         * registration_time : 2018-05-27 00:16:06
          * time_zone : Asia/Calcutta
          * country_code : 91
-         * status : inactive
+         * rider_access : no_access
+         * driver_access : pending
+         * owner_access : no_access
          */
 
         private String user_id;
@@ -56,7 +59,9 @@ public class NewRegisterModel
         private String registration_time;
         private String time_zone;
         private String country_code;
-        private String status;
+        private String rider_access;
+        private String driver_access;
+        private String owner_access;
 
         public String getUser_id() {
             return user_id;
@@ -98,12 +103,28 @@ public class NewRegisterModel
             this.country_code = country_code;
         }
 
-        public String getStatus() {
-            return status;
+        public String getRider_access() {
+            return rider_access;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setRider_access(String rider_access) {
+            this.rider_access = rider_access;
+        }
+
+        public String getDriver_access() {
+            return driver_access;
+        }
+
+        public void setDriver_access(String driver_access) {
+            this.driver_access = driver_access;
+        }
+
+        public String getOwner_access() {
+            return owner_access;
+        }
+
+        public void setOwner_access(String owner_access) {
+            this.owner_access = owner_access;
         }
     }
 }

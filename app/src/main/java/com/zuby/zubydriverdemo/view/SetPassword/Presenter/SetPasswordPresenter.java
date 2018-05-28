@@ -44,7 +44,6 @@ public class SetPasswordPresenter
     public void addService(String data)
     {
         final RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), data);
-//        Retrofit client = RetroClient.ridermanagementurl();
         ApiInterface mApiService = RetroClient.getClient().create(ApiInterface.class);
         Call<SetPasswordModel> addService = mApiService.setPassword(requestBody);
         addService.enqueue(new Callback<SetPasswordModel>()
@@ -55,7 +54,7 @@ public class SetPasswordPresenter
             {
                 try {
                     Log.e("ZUBY", new Gson().toJson(response.body()));
-                    if (response.code()==200)
+                    if (response.code()==200 && response.body().getType().equalsIgnoreCase("success"))
                     {
 
                         // driver id will only be saved for the first time i.e, if we get mobile number already exists then we will not get anyu ddriver id
@@ -73,14 +72,14 @@ public class SetPasswordPresenter
                         mResultInterface.onFailed(response.message());
                     }
                 } catch (Exception e) {
-                    mResultInterface.onFailed("No Data Found");
+//                    mResultInterface.onFailed("No Data Found");
                 }
             }
 
             @Override
             public void onFailure(Call<SetPasswordModel> call, Throwable t)
             {
-                mResultInterface.onFailed("No Data Found");
+//                mResultInterface.onFailed("No Data Found");
                 Log.d("ZUBY", "" + t);
             }
         });

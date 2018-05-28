@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Please take a clear photo of your face for your account.This is what riders will see on trips."
         android:padding="16sp"
+        android:textSize="18sp"
         android:gravity="center"
         />
 </LinearLayout>
