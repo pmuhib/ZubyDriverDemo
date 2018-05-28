@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "895581475525",
+    "firebase_url": "https://zubydriverdem.firebaseio.com",
+    "project_id": "zubydriverdem",
+    "storage_bucket": "zubydriverdem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895581475525:android:8a964058f92b39e8",
+        "android_client_info": {
+          "package_name": "com.zuby.zubydriverdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895581475525-mem4uu3pj7h9t25vcc7lc7b6mpionv45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zuby.zubydriverdemo",
+            "certificate_hash": "4f5deae48c1bffcfe4909fe9611460996e4a42b6"
+          }
+        },
+        {
+          "client_id": "895581475525-65m5t4kapet03jl2dkl89u9ec9g7a2e5.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "895581475525-65m5t4kapet03jl2dkl89u9ec9g7a2e5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl_5IrJUnsumvgtE76RVhyrzc8dVwLM-g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895581475525-65m5t4kapet03jl2dkl89u9ec9g7a2e5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
